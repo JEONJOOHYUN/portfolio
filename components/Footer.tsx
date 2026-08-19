@@ -1,11 +1,11 @@
-import { Mail } from "lucide-react";
+import { Mail, Phone } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
-import { GithubIcon, LinkedinIcon } from "@/components/BrandIcons";
+import { GithubIcon } from "@/components/BrandIcons";
 
 const ICONS = {
   github: GithubIcon,
-  linkedin: LinkedinIcon,
   email: Mail,
+  phone: Phone,
   external: Mail,
 };
 
@@ -25,7 +25,7 @@ export function Footer() {
               <a
                 key={link.label}
                 href={link.url}
-                target={link.icon === "email" ? undefined : "_blank"}
+                target={link.icon === "github" ? "_blank" : undefined}
                 rel="noopener noreferrer"
                 aria-label={link.label}
                 className="text-zinc-500 transition-colors hover:text-zinc-900 dark:hover:text-zinc-100"

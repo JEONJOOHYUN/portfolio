@@ -2,14 +2,14 @@
 
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { Mail, ArrowDown } from "lucide-react";
+import { Mail, Phone, ArrowDown } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
-import { GithubIcon, LinkedinIcon } from "@/components/BrandIcons";
+import { GithubIcon } from "@/components/BrandIcons";
 
 const ICONS = {
   github: GithubIcon,
-  linkedin: LinkedinIcon,
   email: Mail,
+  phone: Phone,
   external: Mail,
 };
 
@@ -84,7 +84,7 @@ export function Hero() {
                 <a
                   key={link.label}
                   href={link.url}
-                  target={link.icon === "email" ? undefined : "_blank"}
+                  target={link.icon === "github" ? "_blank" : undefined}
                   rel="noopener noreferrer"
                   aria-label={link.label}
                   className="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-200 text-zinc-600 transition-colors hover:bg-zinc-100 dark:border-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-900"

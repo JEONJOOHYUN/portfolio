@@ -4,7 +4,7 @@
 export interface ContactLink {
   label: string;
   url: string;
-  icon: "github" | "linkedin" | "email" | "external";
+  icon: "github" | "email" | "phone" | "external";
 }
 
 export interface HeroData {
@@ -82,14 +82,14 @@ export const portfolioData: PortfolioData = {
         icon: "github",
       },
       {
-        label: "LinkedIn",
-        url: "https://linkedin.com/in/your-id", // TODO: 노션에 LinkedIn 정보가 없어 자리표시자입니다.
-        icon: "linkedin",
-      },
-      {
         label: "Email",
         url: "mailto:jeonjh0321@gmail.com",
         icon: "email",
+      },
+      {
+        label: "Phone",
+        url: "tel:010-4549-0335",
+        icon: "phone",
       },
     ],
   },
