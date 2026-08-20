@@ -57,6 +57,8 @@ export interface TimelineItem {
   organization: string;
   description: string;
   type: "work" | "education" | "project";
+  /** projects 배열의 id와 매칭되면, 아이콘 대신 해당 프로젝트 로고를 보여줍니다. */
+  projectId?: string;
 }
 
 export interface PortfolioData {
@@ -226,6 +228,7 @@ export const portfolioData: PortfolioData = {
       description:
         "PC 해상도 기준 화면 레이아웃 구축과 게임 아이템 데이터의 컴포넌트 렌더링을 전담했습니다.",
       type: "project",
+      projectId: "zombuilder",
     },
     {
       id: "timeline-monoglyph",
@@ -235,6 +238,7 @@ export const portfolioData: PortfolioData = {
       description:
         "프론트엔드 아키텍처 설계, UI/UX 구현, AI·오픈소스 리서치 및 API 연동을 전담했습니다. 2025 한이음 드림업 공모전 창의도전형 장려상 수상.",
       type: "project",
+      projectId: "monoglyph",
     },
     {
       id: "timeline-typonic",
@@ -244,6 +248,7 @@ export const portfolioData: PortfolioData = {
       description:
         "Figma 기반 반응형 화면 구현과 실시간 타자 입력 상태 최적화 로직을 담당했습니다. 학과 최우수 프로젝트 선정.",
       type: "project",
+      projectId: "typonic",
     },
     {
       id: "timeline-studyswipe",
@@ -253,6 +258,7 @@ export const portfolioData: PortfolioData = {
       description:
         "React Native 기반 프론트엔드 아키텍처 설계와 동적 설문조사 로직(상태 관리)을 구현했습니다. 학과 최우수 프로젝트 선정.",
       type: "project",
+      projectId: "studyswipe",
     },
   ],
 };

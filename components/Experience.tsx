@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Briefcase, GraduationCap, Rocket } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
@@ -12,7 +13,7 @@ const TYPE_ICONS = {
 };
 
 export function Experience() {
-  const { timeline } = portfolioData;
+  const { timeline, projects } = portfolioData;
 
   return (
     <section id="experience" className="px-6 py-24">
@@ -21,7 +22,9 @@ export function Experience() {
 
         <ol className="relative border-s border-zinc-200 dark:border-zinc-800">
           {timeline.map((item, i) => {
+            const project = projects.find((p) => p.id === item.projectId);
             const Icon = TYPE_ICONS[item.type];
+
             return (
               <motion.li
                 key={item.id}
@@ -31,8 +34,18 @@ export function Experience() {
                 transition={{ duration: 0.5, delay: i * 0.08 }}
                 className="mb-10 ms-8 last:mb-0"
               >
-                <span className="absolute -start-4 flex h-8 w-8 items-center justify-center rounded-full bg-zinc-100 ring-4 ring-white dark:bg-zinc-800 dark:ring-black">
-                  <Icon size={14} className="text-zinc-600 dark:text-zinc-300" />
+                <span className="absolute -start-4 flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-zinc-100 ring-4 ring-white dark:bg-zinc-800 dark:ring-black">
+                  {project ? (
+                    <Image
+                      src={project.icon}
+                      alt={`${project.title} 로고`}
+                      width={20}
+                      height={20}
+                      className="h-5 w-5 object-contain"
+                    />
+                  ) : (
+                    <Icon size={14} className="text-zinc-600 dark:text-zinc-300" />
+                  )}
                 </span>
                 <p className="text-sm font-medium text-zinc-400 dark:text-zinc-500">
                   {item.period}
