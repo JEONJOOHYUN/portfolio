@@ -121,7 +121,7 @@ export const portfolioData: PortfolioData = {
     {
       id: "maple-dashboard",
       title: "메이플 대시보드",
-      tagline: "제가 직접 매일 쓰는 메이플스토리 부주 정산 자동화 도구",
+      tagline: "제가 직접 사용하는 메이플 유틸리티 사이트",
       period: "2026.08 - 진행중",
       team: "개인 프로젝트 (1인 기획·개발, 실사용 중 계속 기능 추가)",
       role: "기획부터 UI/UX, 프론트엔드, Supabase 연동, 배포·성능 튜닝까지 전 과정 담당",
