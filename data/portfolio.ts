@@ -136,9 +136,7 @@ export const portfolioData: PortfolioData = {
       learnings:
         "제가 실제로 매일 쓰는 도구라서, 배포 후 렌더링이 느리다는 걸 직접 체감하고 바로 원인을 찾아 서버 리전과 캐싱 구조를 고쳤습니다. 같은 날짜에 재저장할 때 기본은 '더하기'로 처리하고 덮어쓰기는 별도 버튼으로 분리하는 등, 쓰면서 불편했던 부분을 그때그때 반영해 UX를 계속 다듬고 있습니다. Next.js Server Actions와 Supabase를 조합해 프론트엔드에서 DB까지 직접 다루며 풀스택 구조와 배포 환경에 대한 이해를 넓혔습니다.",
       techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "next-themes"],
-      // TODO: 실제 대시보드 화면 스크린샷으로 교체해 주세요. 지금은 아이콘(메이플 버섯)만 있어서
-      // public/projects/MapleDashboard_img.png 자리에 자리표시자를 넣어뒀습니다.
-      image: "https://placehold.co/800x500/1e293b/94a3b8?text=Maple+Dashboard",
+      image: "/projects/MapleDashboard_img.png",
       icon: "/projects/MapleDashboard_icon.jpg",
       githubUrl: "https://github.com/JEONJOOHYUN/maple-dashboard",
       liveUrl: "https://maple-dashboard-eta.vercel.app/",
