@@ -119,6 +119,31 @@ export const portfolioData: PortfolioData = {
 
   projects: [
     {
+      id: "maple-dashboard",
+      title: "메이플 대시보드",
+      tagline: "제가 직접 매일 쓰는 메이플스토리 부주 정산 자동화 도구",
+      period: "2026.08 - 진행중",
+      team: "개인 프로젝트 (1인 기획·개발, 실사용 중 계속 기능 추가)",
+      role: "기획부터 UI/UX, 프론트엔드, Supabase 연동, 배포·성능 튜닝까지 전 과정 담당",
+      overview:
+        "메이플스토리 부주(사냥 대행) 사냥 수익을 기록하고, 실시간 시세로 정산 금액을 자동 계산해주는 개인용 대시보드입니다. 제가 실제로 매일 사용하면서 여러 메이플 관련 도구를 탭으로 계속 추가하고 있고, 현재 '부주 정산'과 '보스 분배금 계산기' 두 가지 도구가 있습니다.",
+      features: [
+        "부주 정산: 일일 사냥 기록을 누적 저장하고 실시간 시세를 반영해 정산 금액을 자동 계산 (인센티브 메소 지급 기능 포함)",
+        "보스 분배금 계산기: 아이템 판매액을 파티원끼리 나눌 때 수수료까지 반영해 분배금을 자동 계산, 여러 아이템 동시 등록 지원",
+        "여러 부주 관리: 관리자 페이지에서 부주를 추가·관리하고 인원별 기록을 탭으로 구분",
+        "배포 후 렌더링 지연 문제 해결: Vercel 함수와 Supabase 리전이 달라 응답이 느려지는 걸 확인하고, 함수 리전을 서울(icn1)로 고정 + 정산 페이지 DB 조회를 태그 기반으로 캐싱해 응답 속도를 개선",
+      ],
+      learnings:
+        "제가 실제로 매일 쓰는 도구라서, 배포 후 렌더링이 느리다는 걸 직접 체감하고 바로 원인을 찾아 서버 리전과 캐싱 구조를 고쳤습니다. 같은 날짜에 재저장할 때 기본은 '더하기'로 처리하고 덮어쓰기는 별도 버튼으로 분리하는 등, 쓰면서 불편했던 부분을 그때그때 반영해 UX를 계속 다듬고 있습니다. Next.js Server Actions와 Supabase를 조합해 프론트엔드에서 DB까지 직접 다루며 풀스택 구조와 배포 환경에 대한 이해를 넓혔습니다.",
+      techStack: ["Next.js", "TypeScript", "Tailwind CSS", "Supabase", "next-themes"],
+      // TODO: 실제 대시보드 화면 스크린샷으로 교체해 주세요. 지금은 아이콘(메이플 버섯)만 있어서
+      // public/projects/MapleDashboard_img.png 자리에 자리표시자를 넣어뒀습니다.
+      image: "https://placehold.co/800x500/1e293b/94a3b8?text=Maple+Dashboard",
+      icon: "/projects/MapleDashboard_icon.jpg",
+      githubUrl: "https://github.com/JEONJOOHYUN/maple-dashboard",
+      liveUrl: "https://maple-dashboard-eta.vercel.app/",
+    },
+    {
       id: "monoglyph",
       title: "MonoGlyph",
       tagline: "AI로 나만의 스타일 폰트를 만드는 웹 서비스",
