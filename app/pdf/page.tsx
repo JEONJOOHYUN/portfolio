@@ -13,9 +13,11 @@ export default function PdfPage() {
 
   return (
     <div className="pdf-page min-h-screen bg-white text-zinc-900 dark:bg-black dark:text-zinc-50">
-      <PdfPrintButton />
-
       <div className="mx-auto max-w-3xl px-8 py-12 print:max-w-none print:px-0 print:py-0">
+        <div className="mb-6 flex justify-end print:hidden">
+          <PdfPrintButton />
+        </div>
+
         {/* Header */}
         <header className="flex items-start gap-6 border-b border-zinc-200 pb-8 dark:border-zinc-800">
           <Image
