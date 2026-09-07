@@ -210,7 +210,7 @@ export const portfolioData: PortfolioData = {
       learnings:
         "빠른 키보드 입력에도 화면이 즉각적으로 업데이트되어야 했기에, 불필요한 리렌더링을 줄이며 React 상태를 효율적으로 관리하고 렌더링을 최적화하는 경험을 쌓았습니다. Cursor 에이전트로 확보한 시간을 타이핑 시각적 피드백과 UI/UX 디테일을 다듬는 데 투자했습니다.",
       achievement: "학과 최우수 프로젝트 선정",
-      techStack: ["React", "Tailwind CSS", "OpenAI API", "Cursor", "Figma", "VSCode"],
+      techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "OpenAI API", "Cursor", "Figma"],
       image: "/projects/Typonic_img.png",
       icon: "/projects/Typonic_icon.png",
       githubUrl: "https://github.com/JEONJOOHYUN/Typonic-Front",
