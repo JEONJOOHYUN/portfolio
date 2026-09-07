@@ -30,3 +30,15 @@ body {
   background: var(--background);
   color: var(--foreground);
 }
+
+/* /pdf page: A4 with sensible margins, light background regardless of theme */
+@page {
+  size: A4;
+  margin: 16mm;
+}
+
+@media print {
+  html {
+    background: #fff;
+  }
+}

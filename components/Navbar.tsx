@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, FileText } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
@@ -15,7 +15,7 @@ export function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-zinc-200 bg-white/80 backdrop-blur-md dark:border-zinc-800 dark:bg-black/80">
+    <header className="sticky top-0 z-50 border-b border-zinc-200 bg-white/80 backdrop-blur-md print:hidden dark:border-zinc-800 dark:bg-black/80">
       <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
         <a
           href="#home"
@@ -34,6 +34,15 @@ export function Navbar() {
               {link.label}
             </a>
           ))}
+          <a
+            href="/pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+          >
+            <FileText size={15} />
+            PDF로 보기
+          </a>
           <ThemeToggle />
         </div>
 
@@ -62,6 +71,15 @@ export function Navbar() {
               {link.label}
             </a>
           ))}
+          <a
+            href="/pdf"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1.5 rounded-md px-2 py-2 text-sm text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-900"
+          >
+            <FileText size={15} />
+            PDF로 보기
+          </a>
         </div>
       )}
     </header>

@@ -13,7 +13,7 @@ export function Footer() {
   const { hero } = portfolioData;
 
   return (
-    <footer className="border-t border-zinc-200 dark:border-zinc-800">
+    <footer className="border-t border-zinc-200 print:hidden dark:border-zinc-800">
       <div className="mx-auto flex max-w-5xl flex-col items-center gap-4 px-6 py-10 text-sm text-zinc-500 sm:flex-row sm:justify-between dark:text-zinc-500">
         <p>
           © {new Date().getFullYear()} {hero.name}. All rights reserved.
