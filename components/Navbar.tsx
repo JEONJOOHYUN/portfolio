@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import { Menu, X, FileText } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
@@ -42,9 +42,8 @@ export function Navbar() {
           ))}
           <Link
             href="/pdf"
-            className="inline-flex items-center gap-1.5 text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+            className="text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
           >
-            <FileText size={15} />
             PDF
           </Link>
           <ThemeToggle />
@@ -78,9 +77,8 @@ export function Navbar() {
           <Link
             href="/pdf"
             onClick={() => setIsOpen(false)}
-            className="inline-flex items-center gap-1.5 rounded-md px-2 py-2 text-sm text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-900"
+            className="rounded-md px-2 py-2 text-sm text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-900"
           >
-            <FileText size={15} />
             PDF
           </Link>
         </div>
