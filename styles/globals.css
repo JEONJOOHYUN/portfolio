@@ -41,4 +41,14 @@ body {
   html {
     background: #fff;
   }
+
+  /* The /pdf page follows the site's dark/light theme on screen, but
+     printed output should always be a plain light document regardless
+     of which theme was active. */
+  .pdf-page,
+  .pdf-page * {
+    background-color: #fff !important;
+    color: #18181b !important;
+    border-color: #e4e4e7 !important;
+  }
 }

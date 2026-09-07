@@ -36,8 +36,6 @@ export function Navbar() {
           ))}
           <a
             href="/pdf"
-            target="_blank"
-            rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
           >
             <FileText size={15} />
@@ -73,8 +71,6 @@ export function Navbar() {
           ))}
           <a
             href="/pdf"
-            target="_blank"
-            rel="noopener noreferrer"
             className="inline-flex items-center gap-1.5 rounded-md px-2 py-2 text-sm text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-900"
           >
             <FileText size={15} />
