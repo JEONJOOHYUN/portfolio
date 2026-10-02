@@ -5,6 +5,7 @@ import "@/styles/globals.css";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { CursorTrail } from "@/components/CursorTrail";
 import { portfolioData } from "@/data/portfolio";
 
 const paperlogy = localFont({
@@ -45,6 +46,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />
+          <CursorTrail />
         </ThemeProvider>
       </body>
     </html>
