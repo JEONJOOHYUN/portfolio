@@ -37,6 +37,12 @@
     붙으면 그 요소가 기준 상자가 돼, 바깥 기준으로 배치한 자식이 잠깐 튄다(경력 타임라인 아이콘 버그, 2026-10-02 수정).
 - **ProjectModal**: `entered`(마운트 다음 프레임에 true) / `closing` 두 상태로 CSS transition 제어, 220ms 뒤 언마운트.
   과거 Framer `AnimatePresence` 의 exit 가 끝나지 않아 모달이 안 닫히던 버그가 있었다.
+- **모달 이미지 로딩 (2026-10-02)**: `next/image` 에 `fill` 만 주고 `sizes` 를 빼면 `100vw` 로 계산돼 40px 아이콘도
+  1080px↑ 를 받는다 → 아이콘은 `width/height=40`, 히어로는 `HERO_SIZES`. 둘 다 `loading="eager"`(모달은 열린 뒤에야
+  마운트되므로 lazy 는 늦게 뜰 뿐). 카드 `onPointerEnter`/`onFocus` 에서 `preloadProjectImages()` 가 `getImageProps`
+  로 **같은 srcset/sizes** 를 미리 받아, 모달이 열릴 때는 메모리에서 바로 그린다.
+  전체 화면 오버레이의 `backdrop-blur` 는 페이드 중 매 프레임 블러를 다시 계산해 버벅여서 뺐다.
+  `html { scrollbar-gutter: stable }` — 모달의 스크롤 잠금 때 스크롤바가 사라지며 페이지가 옆으로 밀리지 않게.
 - **Navbar 섹션 링크는 `/#about` 형태의 일반 `<a>`**. next/link 는 다른 페이지(/pdf)에서 넘어올 때 해시로 스크롤하지 않는다.
   `/pdf` 링크만 `<Link>`.
 - **ScrollToHash**: Next 가 하이드레이션 뒤 스크롤을 리셋해 `/#projects` 진입 위치를 잃는 문제 보정.
@@ -79,3 +85,4 @@
 - 2026-10-02 반응형 개편(gfactory.ai), Framer Motion 제거 → CSS 애니메이션(maple-mvp.com), 2칸 대표 카드,
   상태 배지, 인수인계 구조 도입.
 - 2026-10-02 경력 타임라인 아이콘이 스크롤 등장 중 튀던 문제 수정(아이콘을 `<li>` 기준으로 배치).
+- 2026-10-02 프로젝트 모달 아이콘이 늦게 뜨고 버벅이던 문제 수정(이미지 크기·eager·미리 받기, 블러 제거, 스크롤바 자리 고정).

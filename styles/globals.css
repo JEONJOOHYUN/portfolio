@@ -65,6 +65,12 @@
   }
 }
 
+/* Keep the scrollbar slot when the modal locks scrolling, so the page does not
+   shift sideways as it opens/closes. */
+html {
+  scrollbar-gutter: stable;
+}
+
 * {
   scroll-behavior: smooth;
 }

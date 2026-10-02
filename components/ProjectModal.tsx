@@ -1,13 +1,45 @@
 "use client";
 
 import { useEffect, useState, type CSSProperties } from "react";
-import Image from "next/image";
+import Image, { getImageProps } from "next/image";
 import { X, CheckCircle2, Trophy, Users, Calendar, ExternalLink } from "lucide-react";
 import type { Project } from "@/data/portfolio";
 import { GithubIcon } from "@/components/BrandIcons";
 
 /** Must match the panel's `duration-*` below — unmount waits for the exit transition. */
 const EXIT_MS = 220;
+
+const HERO_SIZES = "(min-width: 768px) 700px, 100vw";
+const ICON_PX = 40;
+
+const heroProps = (project: Project) => ({
+  src: project.image,
+  fill: true,
+  sizes: HERO_SIZES,
+  unoptimized: project.image.endsWith(".gif"),
+});
+const iconProps = (project: Project) => ({ src: project.icon, width: ICON_PX, height: ICON_PX });
+
+const warmed = new Set<string>();
+
+/**
+ * Start fetching a project's modal images before it opens (card hover / focus /
+ * touch). Same src/srcset/sizes as the modal renders, so the browser picks the
+ * same candidate and the modal paints them from memory instead of popping in.
+ */
+export function preloadProjectImages(project: Project) {
+  if (warmed.has(project.id)) return;
+  warmed.add(project.id);
+  for (const { props } of [
+    getImageProps({ ...heroProps(project), alt: "" }),
+    getImageProps({ ...iconProps(project), alt: "" }),
+  ]) {
+    const img = document.createElement("img");
+    if (props.sizes) img.sizes = props.sizes;
+    if (props.srcSet) img.srcset = props.srcSet;
+    img.src = props.src;
+  }
+}
 
 /** Staggered entrance for the body blocks (CSS `rise`, runs once on mount). */
 const rise = (i: number): { className: string; style: CSSProperties } => ({
@@ -60,7 +92,7 @@ export function ProjectModal({
   return (
     <div
       onClick={handleClose}
-      className={`fixed inset-0 z-[100] flex items-end justify-center bg-black/60 backdrop-blur-sm transition-opacity duration-200 sm:items-center sm:p-6 ${
+      className={`fixed inset-0 z-[100] flex items-end justify-center bg-black/65 transition-opacity duration-200 sm:items-center sm:p-6 ${
         shown ? "opacity-100" : "opacity-0"
       }`}
     >
@@ -78,12 +110,11 @@ export function ProjectModal({
       >
         <div className="relative h-48 w-full shrink-0 sm:h-72">
           <Image
-            src={project.image}
+            {...heroProps(project)}
             alt={`${project.title} 스크린샷`}
-            fill
-            unoptimized={project.image.endsWith(".gif")}
+            loading="eager"
+            fetchPriority="high"
             className="object-cover object-top"
-            sizes="(min-width: 768px) 700px, 100vw"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 
@@ -98,7 +129,12 @@ export function ProjectModal({
 
           <div className="absolute inset-x-0 bottom-0 flex items-center gap-3 p-5">
             <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-lg bg-white/90 ring-1 ring-black/5">
-              <Image src={project.icon} alt="" fill className="object-contain p-1" />
+              <Image
+                {...iconProps(project)}
+                alt=""
+                loading="eager"
+                className="h-full w-full object-contain p-1"
+              />
             </div>
             <h2 className="text-xl font-bold text-white sm:text-2xl">{project.title}</h2>
           </div>
