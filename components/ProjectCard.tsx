@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
 import Image from "next/image";
-import type { Project } from "@/data/portfolio";
+import { portfolioData, type Project } from "@/data/portfolio";
 import { preloadProjectImages } from "@/components/ProjectModal";
 
 /**
@@ -36,6 +36,7 @@ export function ProjectCard({
         // warm the modal images on intent (pointerenter also fires on touch-down)
         onPointerEnter={() => preloadProjectImages(project)}
         onFocus={() => preloadProjectImages(project)}
+        data-cursor={portfolioData.cursorLabel}
         className={`group relative flex w-full flex-col overflow-hidden rounded-2xl bg-white text-left shadow-sm ring-1 ring-zinc-200 transition-[transform,box-shadow] duration-300 ease-out hover:-translate-y-1 hover:shadow-lg focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-900 active:scale-[0.99] sm:block ${wide ? "sm:aspect-[2/1]" : "sm:aspect-[4/3]"} sm:bg-transparent dark:bg-zinc-950 dark:ring-zinc-800 dark:focus-visible:ring-zinc-100 sm:dark:bg-transparent`}
       >
         <div className="relative aspect-[16/10] w-full overflow-hidden sm:absolute sm:inset-0 sm:aspect-auto">

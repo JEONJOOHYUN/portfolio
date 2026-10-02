@@ -68,9 +68,12 @@ export interface PortfolioData {
   about: AboutData;
   projects: Project[];
   timeline: TimelineItem[];
+  /** 커서 링이 프로젝트 카드 위에서 보여주는 짧은 문구 */
+  cursorLabel: string;
 }
 
 export const portfolioData: PortfolioData = {
+  cursorLabel: "보기",
   hero: {
     name: "전주현", // TODO: 노션에 이름이 없어 GitHub 아이디(JEONJOOHYUN)로 추정했습니다. 확인 후 수정해 주세요.
     role: "Frontend Developer",
