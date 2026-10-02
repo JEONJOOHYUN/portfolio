@@ -43,13 +43,15 @@
   로 **같은 srcset/sizes** 를 미리 받아, 모달이 열릴 때는 메모리에서 바로 그린다.
   전체 화면 오버레이의 `backdrop-blur` 는 페이드 중 매 프레임 블러를 다시 계산해 버벅여서 뺐다.
   `html { scrollbar-gutter: stable }` — 모달의 스크롤 잠금 때 스크롤바가 사라지며 페이지가 옆으로 밀리지 않게.
-- **커서 링 (2026-10-02, gfactory.ai 커서에서 착안)**: `components/CursorFollower.tsx`, 홈(`app/page.tsx`)에만.
-  시스템 커서는 그대로 두고 링이 따라온다. 링크·버튼 위 = 옅은 원(`data-state="link"`),
-  `[data-cursor="문구"]` 위 = 흰 원 + 문구(`label`, 프로젝트 카드, 문구는 `portfolioData.cursorLabel`).
-  위치는 React state 를 거치지 않고 rAF 루프가 바깥 요소 `transform` 에 직접 쓴다(따라잡으면 루프 정지).
-  크기·색은 안쪽 `.cursor-ring` 의 CSS transition(`styles/globals.css`). 바깥=위치, 안쪽=모양으로 나눠 transform 충돌 없음.
+- **커서 꼬리 (2026-10-02, gfactory.ai 커서 느낌)**: `components/CursorTrail.tsx`, 홈(`app/page.tsx`)에만.
+  시스템 커서는 그대로 두고, 10px 점 10개가 꼬리처럼 따라오며 뒤로 갈수록 작고 옅어진다. 멈추면 꼬리가 포인터로
+  모였다가(약 0.65초) 페이드아웃, 창 밖으로 나가면 숨김. 흰 점 + `mix-blend-mode: difference` 라 라이트=검정,
+  다크=흰색, 스크린샷 위=반전. 호버 상태 변화·문구는 없다(카드에 이미 호버 반응이 있어 사용자가 빼자고 함).
+  위치는 React state 를 거치지 않고 rAF 루프가 각 점의 `transform` 에 직접 쓴다(점마다 앞 점을 lerp, 모이면 루프 정지).
+  "애니메이션은 CSS 만" 규칙의 유일한 예외 — 포인터 좌표는 CSS 로 못 받는다. 라이브러리는 없다.
   `(hover: hover) and (pointer: fine)` 에서만, `prefers-reduced-motion` 이면 아예 동작 안 함, 인쇄 시 숨김.
-  새 클릭 영역에 문구를 띄우고 싶으면 그 요소에 `data-cursor` 만 붙이면 된다.
+  검증 팁: 가려진 Chrome 창은 rAF 가 초당 1번 수준 → `window.requestAnimationFrame` 을 큐로 바꿔 수동으로 프레임을 돌린 뒤
+  스크린샷. 스크린샷 도구가 포인터를 창 밖으로 빼서 `pointerleave` 로 숨겨질 수 있다.
 - **Navbar 섹션 링크는 `/#about` 형태의 일반 `<a>`**. next/link 는 다른 페이지(/pdf)에서 넘어올 때 해시로 스크롤하지 않는다.
   `/pdf` 링크만 `<Link>`.
 - **ScrollToHash**: Next 가 하이드레이션 뒤 스크롤을 리셋해 `/#projects` 진입 위치를 잃는 문제 보정.
@@ -93,4 +95,5 @@
   상태 배지, 인수인계 구조 도입.
 - 2026-10-02 경력 타임라인 아이콘이 스크롤 등장 중 튀던 문제 수정(아이콘을 `<li>` 기준으로 배치).
 - 2026-10-02 프로젝트 모달 아이콘이 늦게 뜨고 버벅이던 문제 수정(이미지 크기·eager·미리 받기, 블러 제거, 스크롤바 자리 고정).
-- 2026-10-02 커서 링 추가(데스크톱 전용, 카드 위 "보기").
+- 2026-10-02 커서 링 추가(데스크톱 전용, 카드 위 "보기") → 같은 날 사용자 피드백("원이 너무 크다, 보기 문구 별로")으로
+  지팩토리 느낌의 작은 점 꼬리(`CursorTrail`)로 교체.

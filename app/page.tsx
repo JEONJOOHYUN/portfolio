@@ -4,7 +4,7 @@ import { Projects } from "@/components/Projects";
 import { Experience } from "@/components/Experience";
 import { ScrollToHash } from "@/components/ScrollToHash";
 import { RevealObserver } from "@/components/RevealObserver";
-import { CursorFollower } from "@/components/CursorFollower";
+import { CursorTrail } from "@/components/CursorTrail";
 
 export default function Home() {
   return (
@@ -16,7 +16,7 @@ export default function Home() {
       <Experience />
       {/* last, so every [data-reveal] above exists when its effect runs */}
       <RevealObserver />
-      <CursorFollower />
+      <CursorTrail />
     </>
   );
 }
