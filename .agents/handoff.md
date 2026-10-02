@@ -33,6 +33,8 @@
   - `data-reveal` 은 transition/transform/opacity 유틸리티가 **없는 래퍼에만** 붙인다(전역 규칙이 레이어 밖이라 덮어씀).
     예: `ProjectCard` 는 바깥 div 에 reveal, 안쪽 button 에 hover 모션.
   - `prefers-reduced-motion` 존중, 인쇄 시 reveal 요소 강제 표시.
+  - reveal 요소 안의 `absolute` 자식은 **그 reveal 요소 자신을 기준(`relative`)으로** 배치한다. 애니메이션 중 `transform` 이
+    붙으면 그 요소가 기준 상자가 돼, 바깥 기준으로 배치한 자식이 잠깐 튄다(경력 타임라인 아이콘 버그, 2026-10-02 수정).
 - **ProjectModal**: `entered`(마운트 다음 프레임에 true) / `closing` 두 상태로 CSS transition 제어, 220ms 뒤 언마운트.
   과거 Framer `AnimatePresence` 의 exit 가 끝나지 않아 모달이 안 닫히던 버그가 있었다.
 - **Navbar 섹션 링크는 `/#about` 형태의 일반 `<a>`**. next/link 는 다른 페이지(/pdf)에서 넘어올 때 해시로 스크롤하지 않는다.
@@ -76,3 +78,4 @@
 - 2026-09-08 Typonic 기술스택을 저장소 기준 Next.js·TypeScript 로 정정.
 - 2026-10-02 반응형 개편(gfactory.ai), Framer Motion 제거 → CSS 애니메이션(maple-mvp.com), 2칸 대표 카드,
   상태 배지, 인수인계 구조 도입.
+- 2026-10-02 경력 타임라인 아이콘이 스크롤 등장 중 튀던 문제 수정(아이콘을 `<li>` 기준으로 배치).

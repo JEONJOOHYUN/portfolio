@@ -30,9 +30,12 @@ export function Experience() {
                 key={item.id}
                 data-reveal
                 style={{ "--d": `${i * 80}ms` } as CSSProperties}
-                className="mb-10 ms-7 last:mb-0 sm:ms-8"
+                className="relative mb-10 ms-7 last:mb-0 sm:ms-8"
               >
-                <span className="absolute -start-4 flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-zinc-100 ring-4 ring-white dark:bg-zinc-800 dark:ring-black">
+                {/* Anchored to the <li> (not the <ol>): the reveal transform
+                    makes the <li> the containing block mid-animation anyway,
+                    so the icon would jump. Offset = li margin + half icon. */}
+                <span className="absolute -start-11 flex sm:-start-12 h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-zinc-100 ring-4 ring-white dark:bg-zinc-800 dark:ring-black">
                   {project ? (
                     <Image
                       src={project.icon}
