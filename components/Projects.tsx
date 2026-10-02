@@ -13,14 +13,22 @@ export function Projects() {
   return (
     <section
       id="projects"
-      className="bg-zinc-50 px-6 py-24 dark:bg-zinc-950/50"
+      className="bg-zinc-50 px-5 py-16 sm:px-6 sm:py-24 dark:bg-zinc-950/50"
     >
       <div className="mx-auto max-w-5xl">
-        <SectionHeading eyebrow="Projects" title="진행한 프로젝트" />
+        <div data-reveal>
+          <SectionHeading eyebrow="Projects" title="진행한 프로젝트" />
+        </div>
 
         <div className="grid gap-6 sm:grid-cols-2">
-          {projects.map((project) => (
-            <ProjectCard key={project.id} project={project} onOpen={setSelected} />
+          {projects.map((project, i) => (
+            <ProjectCard
+              key={project.id}
+              project={project}
+              index={i}
+              wide={i === 0}
+              onOpen={setSelected}
+            />
           ))}
         </div>
       </div>

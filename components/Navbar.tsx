@@ -21,11 +21,11 @@ export function Navbar() {
 
   return (
     <header className="sticky top-0 z-50 border-b border-zinc-200 bg-white/80 backdrop-blur-md print:hidden dark:border-zinc-800 dark:bg-black/80">
-      <nav className="mx-auto flex max-w-5xl items-center justify-between px-6 py-4">
+      <nav className="mx-auto flex h-16 max-w-5xl items-center justify-between px-5 sm:h-auto sm:px-6 sm:py-4">
         {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- see NAV_LINKS comment above */}
         <a
           href="/#home"
-          className="text-sm font-semibold tracking-tight text-zinc-900 dark:text-zinc-50"
+          className="text-base font-bold tracking-tight text-zinc-900 sm:text-sm sm:font-semibold dark:text-zinc-50"
         >
           {portfolioData.hero.name}
         </a>
@@ -54,22 +54,23 @@ export function Navbar() {
           <button
             type="button"
             onClick={() => setIsOpen((prev) => !prev)}
-            aria-label="메뉴 열기"
-            className="flex h-9 w-9 items-center justify-center rounded-full text-zinc-600 dark:text-zinc-300"
+            aria-label={isOpen ? "메뉴 닫기" : "메뉴 열기"}
+            aria-expanded={isOpen}
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 text-white transition-colors active:bg-zinc-700 dark:bg-zinc-50 dark:text-zinc-900"
           >
-            {isOpen ? <X size={20} /> : <Menu size={20} />}
+            {isOpen ? <X size={18} /> : <Menu size={18} />}
           </button>
         </div>
       </nav>
 
       {isOpen && (
-        <div className="flex flex-col gap-1 border-t border-zinc-200 px-6 py-4 sm:hidden dark:border-zinc-800">
+        <div className="flex flex-col border-t border-zinc-200 px-5 pb-5 pt-2 sm:hidden dark:border-zinc-800">
           {NAV_LINKS.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={() => setIsOpen(false)}
-              className="rounded-md px-2 py-2 text-sm text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-900"
+              className="flex h-12 items-center border-b border-zinc-100 text-lg font-semibold text-zinc-900 last:border-b-0 dark:border-zinc-900 dark:text-zinc-50"
             >
               {link.label}
             </a>
@@ -77,7 +78,7 @@ export function Navbar() {
           <Link
             href="/pdf"
             onClick={() => setIsOpen(false)}
-            className="rounded-md px-2 py-2 text-sm text-zinc-600 hover:bg-zinc-100 dark:text-zinc-400 dark:hover:bg-zinc-900"
+            className="flex h-12 items-center border-b border-zinc-100 text-lg font-semibold text-zinc-900 last:border-b-0 dark:border-zinc-900 dark:text-zinc-50"
           >
             PDF
           </Link>

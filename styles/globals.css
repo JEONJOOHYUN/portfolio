@@ -22,6 +22,49 @@
   --font-mono: var(--font-geist-mono), ui-monospace, monospace;
 }
 
+/* ── Motion ────────────────────────────────────────────────────────────────
+   Pure CSS, no animation library (modeled on maple-mvp.com):
+   rise  — entrance: fade up                 → `animate-rise` + style animationDelay
+   sheen — a band of light sweeping across   → project card hover
+   ping  — a ring pulsing out from a dot     → "구직 중" status dot
+   Scroll reveal uses `data-reveal` + <RevealObserver/> (see below). */
+@theme {
+  --ease-out-soft: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --animate-rise: rise 0.7s var(--ease-out-soft) both;
+  --animate-sheen: sheen 0.9s var(--ease-out-soft);
+  --animate-ping-soft: ping-soft 1.8s cubic-bezier(0, 0, 0.2, 1) infinite;
+
+  @keyframes rise {
+    from {
+      opacity: 0;
+      transform: translateY(14px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  @keyframes sheen {
+    from {
+      transform: translateX(-130%) skewX(-18deg);
+    }
+    to {
+      transform: translateX(260%) skewX(-18deg);
+    }
+  }
+  @keyframes ping-soft {
+    0% {
+      transform: scale(1);
+      opacity: 0.6;
+    }
+    80%,
+    100% {
+      transform: scale(2.6);
+      opacity: 0;
+    }
+  }
+}
+
 * {
   scroll-behavior: smooth;
 }
@@ -29,6 +72,42 @@
 body {
   background: var(--background);
   color: var(--foreground);
+  /* Korean wraps between characters by default ("전주현입니/다."), so break on
+     word boundaries instead; overflow-wrap still rescues long URLs/tokens. */
+  word-break: keep-all;
+  overflow-wrap: break-word;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Scroll reveal. Content is visible by default (no JS = no hidden content);
+   only after <RevealObserver/> marks the page `reveal-ready` do elements that
+   haven't been seen yet start hidden, then fade up when they enter view.
+   Keep `data-reveal` on wrapper elements that have no transition/transform/
+   opacity utilities of their own — these unlayered rules override them. */
+[data-reveal] {
+  transition:
+    opacity 0.7s var(--ease-out-soft),
+    transform 0.7s var(--ease-out-soft);
+  transition-delay: var(--d, 0ms);
+}
+.reveal-ready [data-reveal]:not([data-revealed]) {
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .reveal-ready [data-reveal]:not([data-revealed]) {
+    opacity: 1;
+    transform: none;
+  }
 }
 
 /* /pdf page: A4 with sensible margins, light background regardless of theme */
@@ -40,6 +119,12 @@ body {
 @media print {
   html {
     background: #fff;
+  }
+
+  /* Never print content that hasn't been scrolled into view yet. */
+  [data-reveal] {
+    opacity: 1 !important;
+    transform: none !important;
   }
 
   /* The /pdf page follows the site's dark/light theme on screen, but

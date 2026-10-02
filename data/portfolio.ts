@@ -13,6 +13,8 @@ export interface HeroData {
   tagline: string;
   email: string;
   location: string;
+  /** Hero 상단 상태 배지 문구 (초록 점이 맥박치듯 깜빡임) */
+  status: string;
   photo: string;
   links: ContactLink[];
 }
@@ -76,6 +78,7 @@ export const portfolioData: PortfolioData = {
       "AI 도구를 적극적으로 활용해 UI/UX 디테일과 상태 관리 최적화에 집중하는 프론트엔드 개발자입니다.", // TODO: 원하는 한 줄 소개로 교체해 주세요.
     email: "jeonjh0321@gmail.com",
     location: "South Korea", // TODO: 정확한 지역으로 교체해 주세요.
+    status: "새로운 기회를 찾고 있어요",
     photo: "/IdPhoto.jpg",
     links: [
       {

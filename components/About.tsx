@@ -1,49 +1,39 @@
-"use client";
-
-import { motion } from "framer-motion";
+import type { CSSProperties } from "react";
 import { GraduationCap } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SkillBadge } from "@/components/SkillBadge";
 
+const delay = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
+
 export function About() {
   const { about } = portfolioData;
 
   return (
-    <section id="about" className="px-6 py-24">
+    <section id="about" className="px-5 py-16 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-5xl">
-        <SectionHeading eyebrow="About Me" title="저를 소개합니다" />
+        <div data-reveal>
+          <SectionHeading eyebrow="About Me" title="저를 소개합니다" />
+        </div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5 }}
+        <p
+          data-reveal
+          style={delay(60)}
           className="max-w-2xl text-base leading-relaxed text-zinc-600 dark:text-zinc-400"
         >
           {about.summary}
-        </motion.p>
+        </p>
 
-        <motion.div
-          initial={{ opacity: 0, y: 16 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-80px" }}
-          transition={{ duration: 0.5, delay: 0.08 }}
-          className="mt-5 inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-3.5 py-1.5 text-sm font-medium text-zinc-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300"
-        >
-          <GraduationCap size={16} className="text-zinc-500 dark:text-zinc-400" />
-          학점 {about.gpa}
-        </motion.div>
+        <div data-reveal style={delay(120)} className="mt-5">
+          <span className="inline-flex items-center gap-2 rounded-full border border-zinc-200 bg-zinc-50 px-3.5 py-1.5 text-sm font-medium text-zinc-700 dark:border-zinc-800 dark:bg-zinc-900 dark:text-zinc-300">
+            <GraduationCap size={16} className="text-zinc-500 dark:text-zinc-400" />
+            학점 {about.gpa}
+          </span>
+        </div>
 
-        <div className="mt-12 grid gap-8 sm:grid-cols-2">
+        <div className="mt-10 grid gap-8 sm:mt-12 sm:grid-cols-2">
           {about.skills.map((group, i) => (
-            <motion.div
-              key={group.category}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-            >
+            <div key={group.category} data-reveal style={delay(i * 80)}>
               <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
                 {group.category}
               </h3>
@@ -52,7 +42,7 @@ export function About() {
                   <SkillBadge key={item} label={item} />
                 ))}
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>

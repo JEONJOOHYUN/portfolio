@@ -13,19 +13,19 @@ export default function PdfPage() {
 
   return (
     <div className="pdf-page min-h-screen bg-white text-zinc-900 dark:bg-black dark:text-zinc-50">
-      <div className="mx-auto max-w-3xl px-8 py-12 print:max-w-none print:px-0 print:py-0">
+      <div className="mx-auto max-w-3xl px-5 py-10 sm:px-8 sm:py-12 print:max-w-none print:px-0 print:py-0">
         <div className="mb-6 flex justify-end print:hidden">
           <PdfPrintButton />
         </div>
 
         {/* Header */}
-        <header className="flex items-start gap-6 border-b border-zinc-200 pb-8 dark:border-zinc-800">
+        <header className="flex flex-col items-start gap-4 border-b border-zinc-200 pb-8 sm:flex-row sm:gap-6 dark:border-zinc-800 print:flex-row print:gap-6">
           <Image
             src={hero.photo}
             alt={hero.name}
             width={88}
             height={88}
-            className="h-22 w-22 shrink-0 rounded-full object-cover"
+            className="h-18 w-18 shrink-0 rounded-full object-cover sm:h-22 sm:w-22"
           />
           <div className="flex-1">
             <h1 className="text-3xl font-extrabold tracking-tight">{hero.name}</h1>

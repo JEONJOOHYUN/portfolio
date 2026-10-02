@@ -1,7 +1,5 @@
-"use client";
-
+import type { CSSProperties } from "react";
 import Image from "next/image";
-import { motion } from "framer-motion";
 import { Briefcase, GraduationCap, Rocket } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
 import { SectionHeading } from "@/components/SectionHeading";
@@ -16,9 +14,11 @@ export function Experience() {
   const { timeline, projects } = portfolioData;
 
   return (
-    <section id="experience" className="px-6 py-24">
+    <section id="experience" className="px-5 py-16 sm:px-6 sm:py-24">
       <div className="mx-auto max-w-5xl">
-        <SectionHeading eyebrow="Experience" title="경력 및 이력" />
+        <div data-reveal>
+          <SectionHeading eyebrow="Experience" title="경력 및 이력" />
+        </div>
 
         <ol className="relative border-s border-zinc-200 dark:border-zinc-800">
           {timeline.map((item, i) => {
@@ -26,13 +26,11 @@ export function Experience() {
             const Icon = TYPE_ICONS[item.type];
 
             return (
-              <motion.li
+              <li
                 key={item.id}
-                initial={{ opacity: 0, x: -16 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{ duration: 0.5, delay: i * 0.08 }}
-                className="mb-10 ms-8 last:mb-0"
+                data-reveal
+                style={{ "--d": `${i * 80}ms` } as CSSProperties}
+                className="mb-10 ms-7 last:mb-0 sm:ms-8"
               >
                 <span className="absolute -start-4 flex h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-zinc-100 ring-4 ring-white dark:bg-zinc-800 dark:ring-black">
                   {project ? (
@@ -59,7 +57,7 @@ export function Experience() {
                 <p className="mt-2 max-w-xl text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
                   {item.description}
                 </p>
-              </motion.li>
+              </li>
             );
           })}
         </ol>

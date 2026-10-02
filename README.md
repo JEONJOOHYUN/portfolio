@@ -22,7 +22,6 @@
   <img src="https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white" />
   <img src="https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white" />
   <img src="https://img.shields.io/badge/Tailwind_CSS-06B6D4?style=flat-square&logo=tailwindcss&logoColor=white" />
-  <img src="https://img.shields.io/badge/Framer_Motion-0055FF?style=flat-square&logo=framer&logoColor=white" />
   <br/>
   <img src="https://img.shields.io/badge/Supabase-3FCF8E?style=flat-square&logo=supabase&logoColor=white" />
   <img src="https://img.shields.io/badge/OpenAI_API-412991?style=flat-square&logo=openai&logoColor=white" />
@@ -47,7 +46,8 @@
 
 - **Next.js 16** (App Router) + **TypeScript**
 - **Tailwind CSS v4** — `dark:` variant를 `next-themes`의 `.dark` 클래스에 맞춰 커스텀 설정
-- **Framer Motion** — 스크롤 인 애니메이션, 프로젝트 상세 모달 전환
+- **순수 CSS 애니메이션** — 등장(rise)·빛 훑기(sheen)·맥박(ping) 키프레임과 IntersectionObserver 스크롤 등장. 애니메이션 라이브러리 없이 JS 번들을 가볍게 유지
+- **반응형** — `clamp()` 유동 타이포, 모바일 햄버거 메뉴·바텀시트 모달, 화면 폭에 따라 바뀌는 프로젝트 카드
 - **next-themes** — 깜빡임 없는 다크모드/라이트모드 토글
 - **Paperlogy** 폰트를 `next/font/local`로 self-host (Thin~Black 9단계 굵기 전부 등록)
 - **Vercel**에 배포, GitHub `main` 브랜치에 push할 때마다 자동 재배포
