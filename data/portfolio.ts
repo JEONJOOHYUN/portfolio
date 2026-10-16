@@ -39,6 +39,13 @@ export interface AboutData {
   workspace: WorkspaceShot;
 }
 
+export interface ProjectStatus {
+  /** 카드 왼쪽 위 작은 배지 문구 (예: "운영 중") */
+  label: string;
+  /** true 면 초록 점이 맥박치듯 깜빡임 (지금 실제로 쓰이는 서비스) */
+  live: boolean;
+}
+
 export interface Project {
   id: string;
   title: string;
@@ -58,6 +65,9 @@ export interface Project {
   icon: string;
   githubUrl?: string;
   liveUrl?: string;
+  /** liveUrl 버튼 문구 (사이트면 "사이트 보기", 영상이면 "시연 영상") */
+  liveLabel?: string;
+  status?: ProjectStatus;
   featured?: boolean;
 }
 
@@ -160,16 +170,18 @@ export const portfolioData: PortfolioData = {
       icon: "/projects/MapleDashboard_icon.jpg",
       githubUrl: "https://github.com/JEONJOOHYUN/maple-dashboard",
       liveUrl: "https://maple-dashboard-eta.vercel.app/",
+      liveLabel: "사이트 보기",
+      status: { label: "운영 중", live: true },
     },
     {
       id: "wishes",
       title: "Wishes",
       tagline: "가족 결혼식에서 실제로 쓴 축의금 방명록 태블릿 앱",
       period: "2026.10",
-      team: "개인 프로젝트 (1인 기획·개발, 가족 결혼식에서 실사용)",
+      team: "개인 프로젝트 (1인 기획·개발, 가족 결혼식에서 실사용, 지금도 사용 중)",
       role: "기획부터 화면, Supabase 데이터 설계, 배포까지 혼자 맡았습니다. 결혼식 당일 태블릿 3대가 같은 기록을 동시에 다루는 상황을 전제로, 동시 수정 충돌·네트워크 끊김·중복 번호 같은 실수를 화면과 데이터 양쪽에서 막는 데 집중했습니다.",
       overview:
-        "결혼식 축의금 데스크에서 방명록 번호·이름·금액·식권을 태블릿으로 기록하는 웹앱입니다. 가족 결혼식에서 신랑측·신부측 태블릿 3대로 손님 약 300명을 기록했고, 행사 뒤에는 엑셀로 내보내 정리했습니다. 손님 이름과 금액이 담긴 서비스라 저장소와 사이트는 비공개이며, 여기의 화면은 실제 손님 정보 대신 가짜 데이터로 만든 것입니다.",
+        "결혼식 축의금 데스크에서 방명록 번호·이름·금액·식권을 태블릿으로 기록하는 웹앱입니다. 가족 결혼식에서 신랑측·신부측 태블릿 3대로 손님 약 300명을 기록했고, 행사 뒤에는 엑셀로 내보내 정리했고, 지금도 가족이 계속 쓰고 있습니다. 손님 이름과 금액이 담긴 서비스라 저장소와 사이트는 비공개이며, 여기의 화면은 실제 손님 정보 대신 가짜 데이터로 만든 것입니다.",
       features: [
         "여러 태블릿 실시간 동기화: Supabase Realtime으로 다른 태블릿의 입력·수정·삭제를 바로 반영하고 새로 바뀐 항목을 강조",
         "동시 수정 충돌 방지: 수정 화면을 연 시점의 updated_at을 기준으로 조건부 업데이트해, 다른 태블릿이 먼저 고친 기록을 덮어쓰지 않고 최신 내용을 안내",
@@ -184,6 +196,7 @@ export const portfolioData: PortfolioData = {
       techStack: ["Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "Supabase", "Realtime", "ExcelJS", "Vitest"],
       image: "/projects/Wishes_img.png",
       icon: "/projects/Wishes_icon.png",
+      status: { label: "사용 중 · 비공개", live: true },
     },
     {
       id: "monoglyph",
@@ -208,6 +221,8 @@ export const portfolioData: PortfolioData = {
       icon: "/projects/Monoglyph_icon.png",
       githubUrl: "https://github.com/JEONJOOHYUN/MonoGlyph",
       liveUrl: "https://www.youtube.com/watch?v=NnAXeprRV0w",
+      liveLabel: "시연 영상",
+      status: { label: "시연 영상", live: false },
       featured: true,
     },
     {
@@ -233,6 +248,8 @@ export const portfolioData: PortfolioData = {
       icon: "/projects/StudySwipe_icon.png",
       githubUrl: "https://github.com/JEONJOOHYUN/Study-Swipe-FE",
       liveUrl: "https://www.youtube.com/watch?v=2C50OdqgCNg&t=1s",
+      liveLabel: "시연 영상",
+      status: { label: "시연 영상", live: false },
     },
     {
       id: "typonic",
@@ -257,6 +274,8 @@ export const portfolioData: PortfolioData = {
       icon: "/projects/Typonic_icon.png",
       githubUrl: "https://github.com/JEONJOOHYUN/Typonic-Front",
       liveUrl: "https://www.youtube.com/watch?v=EQWMjf3YXiU",
+      liveLabel: "시연 영상",
+      status: { label: "시연 영상", live: false },
     },
     {
       id: "zombuilder",
@@ -281,6 +300,8 @@ export const portfolioData: PortfolioData = {
       githubUrl: "https://github.com/JEONJOOHYUN/ZomBuilder-frontend",
       liveUrl:
         "http://youtube.com/watch?si=mdhSel2j97zKd74F&t=281&v=6Ol1s1Hj76k&feature=youtu.be",
+      liveLabel: "시연 영상",
+      status: { label: "시연 영상", live: false },
     },
   ],
 

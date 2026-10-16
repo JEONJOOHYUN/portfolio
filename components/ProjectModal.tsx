@@ -242,7 +242,7 @@ export function ProjectModal({
                   className="inline-flex h-11 items-center gap-1.5 rounded-full border border-zinc-200 px-5 text-sm font-medium text-zinc-700 transition-[background-color,transform] duration-200 hover:bg-zinc-100 active:scale-[0.97] dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
                 >
                   <ExternalLink size={16} />
-                  데모 보기
+                  {project.liveLabel ?? "데모 보기"}
                 </a>
               )}
             </div>

@@ -72,6 +72,11 @@
   `githubUrl`/`liveUrl` 없음. 이미지 `public/projects/Wishes_img.png` 는 **가짜 데이터 화면**(실데이터 금지 — 다시 찍으려면
   저장소 밖 작업 폴더의 방법을 따른다, 위치는 `C:\dev\handoff.md`). 아이콘은 Wishes 로고 SVG 를 PNG 로.
   카드 배치: 6개라 `Projects.tsx` 에서 앞의 두 카드(메이플·Wishes)를 2칸 대표 카드(`wide={i < 2}`)로.
+  Wishes 는 행사 뒤에도 가족이 계속 쓰는 중(운영 사이트·실데이터 유지 — 사용자 결정 2026-10-16).
+- **카드 상태 배지 (2026-10-16)**: `project.status = { label, live }` — 메이플 "운영 중", Wishes "사용 중 · 비공개"(둘 다 live = 초록 점 깜빡임),
+  팀 프로젝트 4개 "시연 영상"(회색 점). 배지는 **스크린샷 위가 아니라 제목 위**(스크린샷 왼쪽 위에 두니 Wishes 앱 로고를 가렸다).
+  모달 버튼·`/pdf` 링크 문구는 `project.liveLabel`("사이트 보기"/"시연 영상", 없으면 "데모 보기").
+  팀 프로젝트는 백엔드가 팀원 담당·API 비용이 있어 재배포하지 않고 시연 영상 + GitHub 로 둔다(사용자 동의).
 
 ## TODO (사용자 확인 필요 — `data/portfolio.ts` 의 `// TODO` 주석)
 

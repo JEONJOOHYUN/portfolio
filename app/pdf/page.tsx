@@ -101,6 +101,11 @@ export default function PdfPage() {
                 <div className="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1">
                   <h3 className="text-lg font-bold text-zinc-900 dark:text-zinc-50">
                     {project.title}
+                    {project.status && (
+                      <span className="ml-2 align-middle text-xs font-medium text-zinc-500 dark:text-zinc-400">
+                        {project.status.label}
+                      </span>
+                    )}
                   </h3>
                   <p className="text-xs text-zinc-400 dark:text-zinc-500">
                     {project.period} · {project.team}
@@ -163,7 +168,7 @@ export default function PdfPage() {
                       href={project.liveUrl}
                       className="underline decoration-zinc-300 dark:decoration-zinc-700"
                     >
-                      Demo: {project.liveUrl.replace(/^https?:\/\//, "")}
+                      {project.liveLabel ?? "Demo"}: {project.liveUrl.replace(/^https?:\/\//, "")}
                     </a>
                   )}
                 </p>

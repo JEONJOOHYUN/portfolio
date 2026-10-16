@@ -57,6 +57,20 @@ export function ProjectCard({
         <div className="absolute inset-0 hidden bg-gradient-to-t from-black/85 via-black/25 to-transparent sm:block" />
 
         <div className="flex flex-col gap-1 p-4 sm:absolute sm:inset-x-0 sm:bottom-0 sm:gap-1.5 sm:p-5">
+          {/* status sits with the title, not on the screenshot, so it never covers the app's own header */}
+          {project.status && (
+            <span className="mb-1 inline-flex w-fit items-center gap-1.5 rounded-full bg-zinc-100 px-2.5 py-1 text-xs font-medium text-zinc-700 sm:bg-black/50 sm:text-white sm:ring-1 sm:ring-white/20 dark:bg-zinc-800 dark:text-zinc-300 sm:dark:bg-black/50 sm:dark:text-white">
+              <span className="relative flex h-1.5 w-1.5" aria-hidden="true">
+                {project.status.live && (
+                  <span className="absolute inline-flex h-full w-full animate-ping-soft rounded-full bg-emerald-500" />
+                )}
+                <span
+                  className={`relative inline-flex h-1.5 w-1.5 rounded-full ${project.status.live ? "bg-emerald-500" : "bg-zinc-400"}`}
+                />
+              </span>
+              {project.status.label}
+            </span>
+          )}
           <h3 className="text-lg font-semibold text-zinc-900 sm:text-xl sm:text-white dark:text-zinc-50 sm:dark:text-white">
             {project.title}
           </h3>
