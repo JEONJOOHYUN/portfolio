@@ -66,7 +66,7 @@
   MonoGlyph 의 Claude Agent 배지는 유지).
 - **Workspace 스크린샷 (2026-10-16)**: About 기술 그리드 4번째 칸에 `about.workspace`(이미지·alt·캡션). 클릭하면 원본을 새 탭으로 연다
   (라이트박스 다이얼로그를 만들지 않아 shadcn 불필요). 파일 `public/workspace/orca-workspace.webp`(1920×1080) — 원본 PNG 에서
-  상태줄의 세션/주간 사용률·비용 두 줄, Orca 하단 바 사용률, Windows 사용자 이름이 든 파일 경로 두 줄을 sharp 로 블러(`extract → blur(9) → composite`, 프로젝트 `node_modules/sharp`).
+  상태줄의 세션/주간 사용률·비용 두 줄, Orca 하단 바 사용률, Windows 사용자 이름이 든 파일 경로 두 줄, 왼쪽 세션 제목 두 줄과 위쪽 탭 제목(작업 내용 노출)을 sharp 로 블러(`extract → blur(9) → composite`, 프로젝트 `node_modules/sharp`).
   이미지를 바꿀 때도 같은 영역을 가린다. `/pdf` 에는 이미지를 넣지 않았다.
 - **Wishes 항목 (2026-10-16)**: 개인 비공개 프로젝트(축의금 방명록 태블릿 앱) — 실사용 완료(사용자 확인). 저장소·사이트가 비공개라
   `githubUrl`/`liveUrl` 없음. 이미지 `public/projects/Wishes_img.png` 는 **가짜 데이터 화면**(실데이터 금지 — 다시 찍으려면
