@@ -12,7 +12,9 @@
 
 ## 🧑‍💻 About Me
 
-여러 팀 프로젝트에서 React / React Native 기반 프론트엔드 개발을 맡아왔습니다. OpenAI API 등 AI 기술을 프론트엔드와 연동하는 리서치와 구현을 즐기며, Cursor·Claude 같은 AI 에이전트를 적극 활용해 반복 작업 시간을 줄이고 그만큼 UI/UX 디테일과 상태 관리 최적화에 집중합니다.
+Orca 한 화면에 여러 프로젝트를 띄워 두고 Claude Code와 Codex를 함께 쓰며 개발합니다. Claude Code가 프로젝트 지침(CLAUDE.md)에 맞춰 코드를 쓰면, 커밋 전에 Codex의 리뷰를 받아 지적 사항을 직접 판단해 반영하고 lint·build·브라우저 확인을 거쳐 배포합니다. 에이전트가 코드를 쓰는 동안 저는 무엇을 만들지 정하고, 결과가 설계 의도에 맞는지 검토하며, 상태 관리와 UI/UX 디테일을 다듬는 데 집중합니다.
+
+React·React Native 팀 프로젝트에서 프론트엔드 구조 설계와 구현을 맡아 왔고, OpenAI API 등 AI 기술을 화면과 연결하는 작업을 즐깁니다. AI 모델과 백엔드가 만든 데이터를 프론트엔드가 어떻게 안전하고 효율적으로 주고받을지 함께 고민합니다.
 
 ## 🛠️ Tech Stack
 
@@ -27,7 +29,10 @@
   <img src="https://img.shields.io/badge/OpenAI_API-412991?style=flat-square&logo=openai&logoColor=white" />
   <img src="https://img.shields.io/badge/Figma-F24E1E?style=flat-square&logo=figma&logoColor=white" />
   <img src="https://img.shields.io/badge/Git-F05032?style=flat-square&logo=git&logoColor=white" />
-  <img src="https://img.shields.io/badge/Cursor-000000?style=flat-square&logo=cursor&logoColor=white" />
+  <br/>
+  <img src="https://img.shields.io/badge/Claude_Code-D97757?style=flat-square&logo=claude&logoColor=white" />
+  <img src="https://img.shields.io/badge/Codex-000000?style=flat-square&logo=openai&logoColor=white" />
+  <img src="https://img.shields.io/badge/Orca-1F2937?style=flat-square" />
 </p>
 
 ## 📂 Projects
@@ -35,6 +40,7 @@
 | 프로젝트 | 한 줄 소개 | 기술 스택 | 링크 |
 | --- | --- | --- | --- |
 | **메이플 대시보드** | 제가 직접 사용하는 메이플 유틸리티 사이트 | Next.js · Supabase · shadcn/ui | [GitHub](https://github.com/JEONJOOHYUN/maple-dashboard) · [Demo](https://maple-dashboard-eta.vercel.app/) |
+| **Wishes** | 가족 결혼식에서 실제로 쓴 축의금 방명록 태블릿 앱 (태블릿 3대, 손님 약 300명) | Next.js · Supabase Realtime · shadcn/ui | 비공개 (개인정보 포함) |
 | **MonoGlyph** | AI로 나만의 스타일 폰트를 만드는 웹 서비스 | React · TypeScript · OpenAI API | [GitHub](https://github.com/JEONJOOHYUN/MonoGlyph) |
 | **StudySwipe** | AI 맞춤 설문으로 스터디를 매칭하는 모바일 앱 | React Native · TypeScript | [GitHub](https://github.com/JEONJOOHYUN/Study-Swipe-FE) |
 | **Typonic** | AI 기반 코드/커스텀 타자 연습 플랫폼 | React · Tailwind CSS · OpenAI API | [GitHub](https://github.com/JEONJOOHYUN/Typonic-Front) |

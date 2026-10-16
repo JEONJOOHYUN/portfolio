@@ -60,9 +60,14 @@ export default function PdfPage() {
           <h2 className="text-xs font-semibold uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
             About
           </h2>
-          <p className="mt-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
-            {about.summary}
-          </p>
+          {about.summary.map((paragraph) => (
+            <p
+              key={paragraph}
+              className="mt-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300"
+            >
+              {paragraph}
+            </p>
+          ))}
           <p className="mt-2 text-sm text-zinc-600 dark:text-zinc-400">
             <span className="font-medium text-zinc-400 dark:text-zinc-500">학점</span>{" "}
             {about.gpa}

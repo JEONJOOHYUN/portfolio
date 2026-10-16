@@ -26,7 +26,8 @@ export function Projects() {
               key={project.id}
               project={project}
               index={i}
-              wide={i === 0}
+              // first two are real-use projects; two wide cards keep the 2-col grid full with 6 projects
+              wide={i < 2}
               onOpen={setSelected}
             />
           ))}

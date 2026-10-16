@@ -24,10 +24,19 @@ export interface SkillCategory {
   items: string[];
 }
 
+export interface WorkspaceShot {
+  image: string;
+  alt: string;
+  caption: string;
+}
+
 export interface AboutData {
-  summary: string;
+  /** 문단 단위로 나눠서 보여줍니다. */
+  summary: string[];
   gpa: string;
   skills: SkillCategory[];
+  /** About 섹션에 작게 보여주는 실제 작업 화면 (사용률·비용은 블러 처리) */
+  workspace: WorkspaceShot;
 }
 
 export interface Project {
@@ -100,9 +109,10 @@ export const portfolioData: PortfolioData = {
   },
 
   about: {
-    // TODO: 노션 페이지에 별도의 자기소개 문단이 없어, 4개 프로젝트 설명을 바탕으로 초안을 작성했습니다. 본인 목소리로 다듬어 주세요.
-    summary:
-      "여러 팀 프로젝트에서 React / React Native 기반 프론트엔드 개발을 맡아왔습니다. OpenAI API 등 AI 기술을 프론트엔드와 연동하는 리서치와 구현을 즐기며, Cursor·Claude 같은 AI 에이전트를 적극 활용해 반복 작업 시간을 줄이고 그만큼 UI/UX 디테일과 상태 관리 최적화에 집중합니다.",
+    summary: [
+      "Orca 한 화면에 여러 프로젝트를 띄워 두고 Claude Code와 Codex를 함께 쓰며 개발합니다. Claude Code가 프로젝트 지침(CLAUDE.md)에 맞춰 코드를 쓰면, 커밋 전에 Codex의 리뷰를 받아 지적 사항을 직접 판단해 반영하고 lint·build·브라우저 확인을 거쳐 배포합니다. 에이전트가 코드를 쓰는 동안 저는 무엇을 만들지 정하고, 결과가 설계 의도에 맞는지 검토하며, 상태 관리와 UI/UX 디테일을 다듬는 데 집중합니다.",
+      "React·React Native 팀 프로젝트에서 프론트엔드 구조 설계와 구현을 맡아 왔고, OpenAI API 등 AI 기술을 화면과 연결하는 작업을 즐깁니다. AI 모델과 백엔드가 만든 데이터를 프론트엔드가 어떻게 안전하고 효율적으로 주고받을지 함께 고민합니다.",
+    ],
     gpa: "4.21 / 4.5", // TODO: 실제 학점으로 교체해 주세요.
     skills: [
       {
@@ -110,14 +120,19 @@ export const portfolioData: PortfolioData = {
         items: ["React", "React Native", "TypeScript", "Tailwind CSS", "CSS"],
       },
       {
-        category: "AI / API",
-        items: ["OpenAI API", "Claude Agent", "Cursor"],
+        category: "AI / 개발 환경",
+        items: ["Claude Code", "Codex", "Orca", "OpenAI API"],
       },
       {
         category: "Tools",
         items: ["Figma", "Git", "VSCode"],
       },
     ],
+    workspace: {
+      image: "/workspace/orca-workspace.webp",
+      alt: "Orca 한 화면에 여러 프로젝트와 Claude Code 세션, 작업 요약 패널, 파일 트리를 띄워 둔 실제 작업 화면",
+      caption: "Orca에서 Claude Code로 작업하는 실제 화면 · 클릭하면 크게 볼 수 있어요",
+    },
   },
 
   projects: [
@@ -147,6 +162,30 @@ export const portfolioData: PortfolioData = {
       liveUrl: "https://maple-dashboard-eta.vercel.app/",
     },
     {
+      id: "wishes",
+      title: "Wishes",
+      tagline: "가족 결혼식에서 실제로 쓴 축의금 방명록 태블릿 앱",
+      period: "2026.10",
+      team: "개인 프로젝트 (1인 기획·개발, 가족 결혼식에서 실사용)",
+      role: "기획부터 화면, Supabase 데이터 설계, 배포까지 혼자 맡았습니다. 결혼식 당일 태블릿 3대가 같은 기록을 동시에 다루는 상황을 전제로, 동시 수정 충돌·네트워크 끊김·중복 번호 같은 실수를 화면과 데이터 양쪽에서 막는 데 집중했습니다.",
+      overview:
+        "결혼식 축의금 데스크에서 방명록 번호·이름·금액·식권을 태블릿으로 기록하는 웹앱입니다. 가족 결혼식에서 신랑측·신부측 태블릿 3대로 손님 약 300명을 기록했고, 행사 뒤에는 엑셀로 내보내 정리했습니다. 손님 이름과 금액이 담긴 서비스라 저장소와 사이트는 비공개이며, 여기의 화면은 실제 손님 정보 대신 가짜 데이터로 만든 것입니다.",
+      features: [
+        "여러 태블릿 실시간 동기화: Supabase Realtime으로 다른 태블릿의 입력·수정·삭제를 바로 반영하고 새로 바뀐 항목을 강조",
+        "동시 수정 충돌 방지: 수정 화면을 연 시점의 updated_at을 기준으로 조건부 업데이트해, 다른 태블릿이 먼저 고친 기록을 덮어쓰지 않고 최신 내용을 안내",
+        "오프라인 대기열: 식장 와이파이가 끊겨도 새 기록을 기기에 보관했다가 연결되면 자동으로 다시 보내고, 클라이언트에서 만든 UUID로 중복 저장을 방지",
+        "빠른 입력: 낙관적 업데이트, 번호 자동 채움과 중복 번호 경고, 만원/원 단위 금액 입력, 한글 입력 중에도 동작하는 초성 검색",
+        "PIN 로그인 잠금: 5회 실패 시 10분 잠금, 검증 전에 시도 횟수를 원자적으로 올려 병렬 요청으로 우회하지 못하게 처리",
+        "정리·내보내기: 신랑측/신부측 합계와 빠진 번호, 계좌이체 손님 분리, 구분(아빠/엄마/형)별 엑셀·CSV 내보내기",
+      ],
+      learnings:
+        "실제 행사에서 여러 사람이 동시에 쓰는 서비스라 '저장되지 않았는데 저장된 것처럼 보이면 안 된다'는 원칙을 세우고, 저장 중·저장됨·저장 대기 상태를 항상 화면에 보여주도록 설계했습니다. 수정 충돌 검사의 기준값을 실시간으로 계속 바뀌는 목록 값으로 잡아 검사가 무력화되던 버그를 직접 겪고, 수정 화면을 연 시점의 값으로 고정해 해결하면서 실시간 데이터와 낙관적 업데이트가 함께 있을 때의 상태 관리를 깊이 이해하게 됐습니다.",
+      achievement: "가족 결혼식에서 태블릿 3대로 손님 약 300명 기록 (실사용)",
+      techStack: ["Next.js", "TypeScript", "Tailwind CSS", "shadcn/ui", "Supabase", "Realtime", "ExcelJS", "Vitest"],
+      image: "/projects/Wishes_img.png",
+      icon: "/projects/Wishes_icon.png",
+    },
+    {
       id: "monoglyph",
       title: "MonoGlyph",
       tagline: "AI로 나만의 스타일 폰트를 만드는 웹 서비스",
@@ -162,9 +201,9 @@ export const portfolioData: PortfolioData = {
         "UX 최적화: 무거운 폰트 생성 작업 중 이탈을 막기 위한 진행 상태 로딩 UI 및 에러 핸들링 도입",
       ],
       learnings:
-        "단순히 화면을 그리는 것을 넘어, 백엔드의 AI 모델과 프론트엔드가 어떻게 데이터를 주고받아야 효율적인지 깊이 고민할 수 있었습니다. 무거운 비동기 응답 대기 시간을 처리하고 복잡한 상태를 관리하는 과정에서 Cursor와 Claude 에이전트를 적극 활용해 UI 컴포넌트 개발 시간을 단축하고 로직을 최적화했습니다.",
+        "단순히 화면을 그리는 것을 넘어, 백엔드의 AI 모델과 프론트엔드가 어떻게 데이터를 주고받아야 효율적인지 깊이 고민할 수 있었습니다. 무거운 비동기 응답 대기 시간을 처리하고 복잡한 상태를 관리하는 과정에서 Claude 에이전트를 적극 활용해 UI 컴포넌트 개발 시간을 단축하고 로직을 최적화했습니다.",
       achievement: "2025 한이음 드림업 공모전 창의도전형 장려상 수상",
-      techStack: ["React", "TypeScript", "Tailwind CSS", "Cursor", "Claude Agent", "Figma"],
+      techStack: ["React", "TypeScript", "Tailwind CSS", "Claude Agent", "Figma"],
       image: "/projects/Monoglyph_img.png",
       icon: "/projects/Monoglyph_icon.png",
       githubUrl: "https://github.com/JEONJOOHYUN/MonoGlyph",
@@ -184,12 +223,12 @@ export const portfolioData: PortfolioData = {
         "AI 기반 사용자 수준 파악: OpenAI API를 프론트엔드에 연동해 설문 응답을 바탕으로 학습 수준을 파악",
         "설문조사 점수 산출 및 매칭 데이터 처리: 항목별 내부 점수를 매기고 분류해 최적의 스터디원과 연결되도록 데이터 처리 및 UI 반영",
         "사용자 친화적인 UI/UX 개선: 모바일 환경에서 설문조사와 매칭 결과를 직관적으로 확인할 수 있도록 화면 컴포넌트 개선",
-        "개발 생산성 향상: Cursor 등 AI 에이전트로 React Native 기본 레이아웃 구성 시간을 단축하고 UI 디테일에 집중",
+        "개발 생산성 향상: AI 에이전트로 React Native 기본 레이아웃 구성 시간을 단축하고 UI 디테일에 집중",
       ],
       learnings:
         "웹을 넘어 React Native를 다루며 모바일 환경 특유의 렌더링과 상태 관리를 깊이 경험할 수 있었습니다. AI API를 활용해 '사용자 응답에 따라 실시간으로 변하는 동적 UI'를 설계하며 복잡한 컴포넌트 구조와 비동기 데이터 처리에 대한 이해도를 크게 높였습니다.",
       achievement: "학과 최우수 프로젝트 선정",
-      techStack: ["React Native", "TypeScript", "AI 수준 평가 API", "Cursor", "Git"],
+      techStack: ["React Native", "TypeScript", "AI 수준 평가 API", "Git"],
       image: "/projects/StudySwipe_gif.gif",
       icon: "/projects/StudySwipe_icon.png",
       githubUrl: "https://github.com/JEONJOOHYUN/Study-Swipe-FE",
@@ -208,12 +247,12 @@ export const portfolioData: PortfolioData = {
         "실시간 타자 상태 관리 및 상호작용: 키보드 입력에 맞춰 타자 속도, 오타율을 실시간 계산하고 지연 없이 렌더링하도록 상태 최적화",
         "픽셀 퍼펙트 반응형 UI: Figma 디자인을 바탕으로 Tailwind CSS로 다양한 디바이스에 맞는 반응형 UI 구현",
         "맞춤형 연습 데이터 렌더링: 서버에서 받은 코딩 연습용 텍스트 데이터를 연습하기 편한 UI 컴포넌트로 구조화",
-        "AI 툴링을 통한 생산성 향상: Cursor 등 AI 기반 IDE로 반복적인 레이아웃·보일러플레이트 코드 생성 자동화",
+        "AI 툴링을 통한 생산성 향상: AI 코딩 도구로 반복적인 레이아웃·보일러플레이트 코드 생성 자동화",
       ],
       learnings:
-        "빠른 키보드 입력에도 화면이 즉각적으로 업데이트되어야 했기에, 불필요한 리렌더링을 줄이며 React 상태를 효율적으로 관리하고 렌더링을 최적화하는 경험을 쌓았습니다. Cursor 에이전트로 확보한 시간을 타이핑 시각적 피드백과 UI/UX 디테일을 다듬는 데 투자했습니다.",
+        "빠른 키보드 입력에도 화면이 즉각적으로 업데이트되어야 했기에, 불필요한 리렌더링을 줄이며 React 상태를 효율적으로 관리하고 렌더링을 최적화하는 경험을 쌓았습니다. AI 에이전트로 확보한 시간을 타이핑 시각적 피드백과 UI/UX 디테일을 다듬는 데 투자했습니다.",
       achievement: "학과 최우수 프로젝트 선정",
-      techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "OpenAI API", "Cursor", "Figma"],
+      techStack: ["Next.js", "React", "TypeScript", "Tailwind CSS", "OpenAI API", "Figma"],
       image: "/projects/Typonic_img.png",
       icon: "/projects/Typonic_icon.png",
       githubUrl: "https://github.com/JEONJOOHYUN/Typonic-Front",

@@ -1,6 +1,6 @@
 # Handoff — portfolio
 
-마지막 갱신: 2026-10-02
+마지막 갱신: 2026-10-16
 
 ## Current Goal
 
@@ -59,6 +59,19 @@
 - **/pdf**: 화면에서는 다크모드를 따르고, 인쇄할 때는 `.pdf-page` 규칙으로 항상 밝게. Navbar/Footer 는 `print:hidden`.
 - **Hero 상태 배지**: `hero.status` ("새로운 기회를 찾고 있어요") + 초록 ping 점. 취업이 되면 문구를 바꾸거나 지운다.
 - shadcn/ui 미도입 — 도입 기준은 `C:\dev\CLAUDE.md` 3절.
+- **자기소개·AI 도구 (2026-10-16)**: `about.summary` 는 **문단 배열(`string[]`)** — 사용자의 사람인 마이 커리어 문장을 사이트용으로 축약
+  (같은 날 사용자 요청: 길이 축약, "아키텍처 설계 전담" → "구조 설계와 구현을 맡아", "바이브 코딩" 표현은 사이트에서 뺌).
+  홈·`/pdf` 둘 다 map 으로 문단을 그린다. AI 묶음은 `AI / 개발 환경`: Claude Code·Codex·Orca·OpenAI API.
+  **Cursor(에디터)는 사용자 요청으로 사이트·README 에서 전부 제거** (지난 프로젝트 문장은 "AI 에이전트"/"AI 코딩 도구"로 바꿈,
+  MonoGlyph 의 Claude Agent 배지는 유지).
+- **Workspace 스크린샷 (2026-10-16)**: About 기술 그리드 4번째 칸에 `about.workspace`(이미지·alt·캡션). 클릭하면 원본을 새 탭으로 연다
+  (라이트박스 다이얼로그를 만들지 않아 shadcn 불필요). 파일 `public/workspace/orca-workspace.webp`(1920×1080) — 원본 PNG 에서
+  상태줄의 세션/주간 사용률·비용 두 줄, Orca 하단 바 사용률, Windows 사용자 이름이 든 파일 경로 두 줄을 sharp 로 블러(`extract → blur(9) → composite`, 프로젝트 `node_modules/sharp`).
+  이미지를 바꿀 때도 같은 영역을 가린다. `/pdf` 에는 이미지를 넣지 않았다.
+- **Wishes 항목 (2026-10-16)**: 개인 비공개 프로젝트(축의금 방명록 태블릿 앱) — 실사용 완료(사용자 확인). 저장소·사이트가 비공개라
+  `githubUrl`/`liveUrl` 없음. 이미지 `public/projects/Wishes_img.png` 는 **가짜 데이터 화면**(실데이터 금지 — 다시 찍으려면
+  저장소 밖 작업 폴더의 방법을 따른다, 위치는 `C:\dev\handoff.md`). 아이콘은 Wishes 로고 SVG 를 PNG 로.
+  카드 배치: 6개라 `Projects.tsx` 에서 앞의 두 카드(메이플·Wishes)를 2칸 대표 카드(`wide={i < 2}`)로.
 
 ## TODO (사용자 확인 필요 — `data/portfolio.ts` 의 `// TODO` 주석)
 
@@ -98,3 +111,5 @@
 - 2026-10-02 커서 링 추가(데스크톱 전용, 카드 위 "보기") → 같은 날 사용자 피드백("원이 너무 크다, 보기 문구 별로")으로
   지팩토리 느낌의 작은 점 꼬리(`CursorTrail`)로 교체. 색(흰 점 + difference)은 사용자가 마음에 들어함.
   처음엔 홈에만 있어 `/pdf` 에서 안 나와서 루트 레이아웃으로 옮김.
+- 2026-10-16 자기소개를 사람인 문장으로 교체(문단 배열), AI 도구를 Claude Code·Codex·Orca 로, Cursor 제거,
+  블러 처리한 작업 화면(Workspace) 추가, README 동기화. 같은 날 소개 축약, Wishes 프로젝트 추가(가짜 데이터 화면, 두 번째 대표 카드).
