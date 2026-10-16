@@ -59,7 +59,7 @@ export function Hero() {
 
         <p
           style={{ animationDelay: "200ms" }}
-          className="animate-rise max-w-xl text-base leading-relaxed text-zinc-600 sm:text-lg dark:text-zinc-400"
+          className="animate-rise text-base leading-relaxed text-zinc-600 sm:text-lg dark:text-zinc-400"
         >
           {hero.tagline}
         </p>

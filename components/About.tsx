@@ -17,7 +17,7 @@ export function About() {
           <SectionHeading eyebrow="About Me" title="저를 소개합니다" />
         </div>
 
-        <div data-reveal style={delay(60)} className="flex max-w-2xl flex-col gap-4">
+        <div data-reveal style={delay(60)} className="flex flex-col gap-4">
           {about.summary.map((paragraph) => (
             <p
               key={paragraph}
