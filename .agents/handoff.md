@@ -125,3 +125,4 @@
 - 2026-10-26 MonoGlyph 항목을 실제 담당 기준으로 고침(사용자 확인): 모델 리서치(MX-Font·DeepVecFont 비교, 입력 글자 수 검토, 최종 파이프라인은 MX-Font),
   ChatGPT식 초기 화면과 생성 폰트 관리자 페이지의 "틀"만 만들어 팀원에게 넘김. 화면 구현·비동기 상태·로딩 UI 문구는 사실과 달라 삭제.
   GitHub 링크(`JEONJOOHYUN/MonoGlyph`)는 팀원이 올린 AI 파이프라인(Python) 저장소 — 프론트 코드 아님, 링크는 그대로 둠. 문구만 바뀌어 Codex 리뷰 생략.
+- 2026-11-01 Next 16.3.1 → 16.4.3 + `npm audit fix`(Next.js 10월 보안 업데이트(2026-10-14: Server Actions DoS·이미지 SVG RCE·use cache RCE, 16.4.1 에서 수정) — `next/image` 를 써서 이미지 항목이 걸림). lint·build·`next start` 로 `/`·`/pdf`·`/_next/image` 확인, Codex 리뷰 지적 없음.
