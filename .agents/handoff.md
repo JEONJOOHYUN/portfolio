@@ -67,7 +67,7 @@
   **Cursor(에디터)는 사용자 요청으로 사이트·README 에서 전부 제거** (지난 프로젝트 문장은 "AI 에이전트"/"AI 코딩 도구"로 바꿈,
   MonoGlyph 의 Claude Agent 배지는 유지).
 - **Workspace 스크린샷 (2026-11-26 교체)**: `about.workspace`(이미지·크기·alt·캡션), 파일 `public/workspace/orca-workspace.webp`(1574×859,
-  사용자가 준 Orca 화면). **민감한 것만 가린다**(사용자, 2026-11-26 — 처음엔 전부 가렸다가 "너무 가렸다"로 A안 = 비교 https://claude.ai/artifact/YYaxs95ZjbYyEtFzKFXAtw):
+  사용자가 준 Orca 화면). **민감한 것만 가린다**(사용자, 2026-11-26 — 처음엔 전부 가렸다가 "너무 가렸다"로 A안 = 비교 https://claude.ai/artifact/YYaxs95ZjbYyEtFzKFXAtw, 2026-11-26 삭제됨):
   파일 경로 줄(Windows 사용자 이름) · 상태줄(사용량 · 리셋 시각 · 비용 · 권한 모드) · 왼쪽 프로젝트/세션 목록(비공개 저장소 이름) · 아래 사용량 줄만
   sharp `extract → blur(10) → composite`. 대화와 파일 트리(이름만)는 보이게 둔다. 바꿀 때도 같은 기준.
   누르면 **모달로 크게**(`components/WorkspaceFigure.tsx`, 사용자 요청 — 새 탭 대신): 브라우저 기본 `<dialog>` + `showModal()` 이라 포커스 가두기 ·
