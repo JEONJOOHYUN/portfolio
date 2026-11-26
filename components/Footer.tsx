@@ -18,7 +18,7 @@ export function Footer() {
         <p>
           © {new Date().getFullYear()} {hero.name}. All rights reserved.
         </p>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-1">
           {hero.links.map((link) => {
             const Icon = ICONS[link.icon];
             return (
@@ -28,7 +28,7 @@ export function Footer() {
                 target={link.icon === "github" ? "_blank" : undefined}
                 rel="noopener noreferrer"
                 aria-label={link.label}
-                className="text-zinc-500 transition-colors hover:text-zinc-900 dark:hover:text-zinc-100"
+                className="flex h-10 w-10 items-center justify-center rounded-full text-zinc-500 transition-[color,background-color] hover:bg-zinc-100 hover:text-zinc-900 dark:hover:bg-zinc-900 dark:hover:text-zinc-100"
               >
                 <Icon size={18} />
               </a>

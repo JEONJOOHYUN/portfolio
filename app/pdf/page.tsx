@@ -32,7 +32,7 @@ export default function PdfPage() {
             <p className="mt-1 text-base font-medium text-zinc-600 dark:text-zinc-400">
               {hero.role} · {hero.location}
             </p>
-            <p className="mt-3 max-w-xl text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+            <p className="mt-3 max-w-xl text-sm leading-relaxed text-pretty text-zinc-600 dark:text-zinc-400">
               {hero.tagline}
             </p>
             <dl className="mt-4 flex flex-wrap gap-x-6 gap-y-1 text-sm text-zinc-600 dark:text-zinc-400">
@@ -63,7 +63,7 @@ export default function PdfPage() {
           {about.summary.map((paragraph) => (
             <p
               key={paragraph}
-              className="mt-2 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300"
+              className="mt-2 text-sm leading-relaxed text-pretty text-zinc-700 dark:text-zinc-300"
             >
               {paragraph}
             </p>
@@ -115,11 +115,11 @@ export default function PdfPage() {
                   {project.tagline}
                 </p>
 
-                <p className="mt-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+                <p className="mt-3 text-sm leading-relaxed text-pretty text-zinc-700 dark:text-zinc-300">
                   {project.overview}
                 </p>
 
-                <p className="mt-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+                <p className="mt-3 text-sm leading-relaxed text-pretty text-zinc-700 dark:text-zinc-300">
                   <span className="font-semibold text-zinc-900 dark:text-zinc-50">
                     나의 역할.{" "}
                   </span>
@@ -130,14 +130,14 @@ export default function PdfPage() {
                   <p className="text-sm font-semibold text-zinc-900 dark:text-zinc-50">
                     무엇을 했는가
                   </p>
-                  <ul className="mt-1 list-disc space-y-1 pl-5 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+                  <ul className="mt-1 list-disc space-y-1 pl-5 text-sm leading-relaxed text-pretty text-zinc-700 dark:text-zinc-300">
                     {project.features.map((feature) => (
                       <li key={feature}>{feature}</li>
                     ))}
                   </ul>
                 </div>
 
-                <p className="mt-3 text-sm leading-relaxed text-zinc-700 dark:text-zinc-300">
+                <p className="mt-3 text-sm leading-relaxed text-pretty text-zinc-700 dark:text-zinc-300">
                   <span className="font-semibold text-zinc-900 dark:text-zinc-50">
                     배운 점.{" "}
                   </span>

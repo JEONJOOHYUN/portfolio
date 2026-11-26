@@ -15,7 +15,7 @@ export function ThemeToggle() {
   }, []);
 
   if (!mounted) {
-    return <div className="h-9 w-9" aria-hidden="true" />;
+    return <div className="h-10 w-10" aria-hidden="true" />;
   }
 
   const isDark = resolvedTheme === "dark";
@@ -25,7 +25,7 @@ export function ThemeToggle() {
       type="button"
       onClick={() => setTheme(isDark ? "light" : "dark")}
       aria-label={isDark ? "라이트 모드로 전환" : "다크 모드로 전환"}
-      className="flex h-9 w-9 items-center justify-center rounded-full border border-zinc-200 text-zinc-600 transition-colors hover:bg-zinc-100 dark:border-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-800"
+      className="flex h-10 w-10 items-center justify-center rounded-full border border-zinc-200 text-zinc-600 transition-[background-color,scale] duration-200 hover:bg-zinc-100 active:scale-[0.96] dark:border-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-800"
     >
       {isDark ? <Sun size={18} /> : <Moon size={18} />}
     </button>

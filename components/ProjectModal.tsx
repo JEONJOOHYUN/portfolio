@@ -102,7 +102,7 @@ export function ProjectModal({
         role="dialog"
         aria-modal="true"
         aria-label={project.title}
-        className={`relative flex max-h-[92dvh] w-full max-w-2xl flex-col overflow-hidden rounded-t-2xl bg-white shadow-2xl transition-[opacity,transform] duration-[220ms] ease-out sm:max-h-[88vh] sm:rounded-2xl dark:bg-zinc-900 ${
+        className={`relative flex max-h-[92dvh] w-full max-w-2xl flex-col overflow-hidden rounded-t-2xl bg-white shadow-2xl transition-[opacity,translate,scale] duration-[220ms] ease-out sm:max-h-[88vh] sm:rounded-2xl dark:bg-zinc-900 ${
           shown
             ? "translate-y-0 opacity-100 sm:scale-100"
             : "translate-y-8 opacity-0 sm:translate-y-3 sm:scale-[0.98]"
@@ -122,7 +122,7 @@ export function ProjectModal({
             type="button"
             onClick={handleClose}
             aria-label="닫기"
-            className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full bg-black/45 text-white backdrop-blur-sm transition-[background-color,transform] duration-200 hover:bg-black/60 active:scale-95 sm:right-4 sm:top-4"
+            className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full bg-black/45 text-white backdrop-blur-sm transition-[background-color,scale] duration-200 hover:bg-black/60 active:scale-[0.96] sm:right-4 sm:top-4"
           >
             <X size={18} />
           </button>
@@ -136,11 +136,11 @@ export function ProjectModal({
                 className="h-full w-full object-contain p-1"
               />
             </div>
-            <h2 className="text-xl font-bold text-white sm:text-2xl">{project.title}</h2>
+            <h2 className="text-xl font-bold text-balance text-white sm:text-2xl">{project.title}</h2>
           </div>
         </div>
 
-        <div className="overflow-y-auto p-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))] sm:p-6">
+        <div className="overflow-y-auto overscroll-contain p-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))] sm:p-6">
           <div className="flex flex-col gap-6">
             <div
               {...rise(0)}
@@ -158,7 +158,7 @@ export function ProjectModal({
 
             <p
               {...rise(1)}
-              className={`${rise(1).className} text-base leading-relaxed text-zinc-700 dark:text-zinc-300`}
+              className={`${rise(1).className} text-base leading-relaxed text-pretty text-zinc-700 dark:text-zinc-300`}
             >
               {project.overview}
             </p>
@@ -167,7 +167,7 @@ export function ProjectModal({
               <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
                 나의 역할
               </h3>
-              <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+              <p className="text-sm leading-relaxed text-pretty text-zinc-600 dark:text-zinc-400">
                 {project.role}
               </p>
             </div>
@@ -193,7 +193,7 @@ export function ProjectModal({
               <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
                 배운 점
               </h3>
-              <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+              <p className="text-sm leading-relaxed text-pretty text-zinc-600 dark:text-zinc-400">
                 {project.learnings}
               </p>
             </div>
@@ -228,7 +228,7 @@ export function ProjectModal({
                   href={project.githubUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-11 items-center gap-1.5 rounded-full bg-zinc-900 px-5 text-sm font-medium text-white transition-[background-color,transform] duration-200 hover:bg-zinc-700 active:scale-[0.97] dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
+                  className="inline-flex h-11 items-center gap-1.5 rounded-full bg-zinc-900 px-5 text-sm font-medium text-white transition-[background-color,scale] duration-200 hover:bg-zinc-700 active:scale-[0.96] dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
                 >
                   <GithubIcon size={16} />
                   GitHub
@@ -239,7 +239,7 @@ export function ProjectModal({
                   href={project.liveUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex h-11 items-center gap-1.5 rounded-full border border-zinc-200 px-5 text-sm font-medium text-zinc-700 transition-[background-color,transform] duration-200 hover:bg-zinc-100 active:scale-[0.97] dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
+                  className="inline-flex h-11 items-center gap-1.5 rounded-full border border-zinc-200 px-5 text-sm font-medium text-zinc-700 transition-[background-color,scale] duration-200 hover:bg-zinc-100 active:scale-[0.96] dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
                 >
                   <ExternalLink size={16} />
                   {project.liveLabel ?? "데모 보기"}

@@ -23,6 +23,7 @@ export function Experience() {
         <ol className="relative border-s border-zinc-200 dark:border-zinc-800">
           {timeline.map((item, i) => {
             const project = projects.find((p) => p.id === item.projectId);
+            const logo = item.icon ?? project?.icon;
             const Icon = TYPE_ICONS[item.type];
 
             return (
@@ -36,10 +37,10 @@ export function Experience() {
                     makes the <li> the containing block mid-animation anyway,
                     so the icon would jump. Offset = li margin + half icon. */}
                 <span className="absolute -start-11 flex sm:-start-12 h-8 w-8 items-center justify-center overflow-hidden rounded-full bg-zinc-100 ring-4 ring-white dark:bg-zinc-800 dark:ring-black">
-                  {project ? (
+                  {logo ? (
                     <Image
-                      src={project.icon}
-                      alt={`${project.title} 로고`}
+                      src={logo}
+                      alt={`${item.title} 로고`}
                       width={20}
                       height={20}
                       className="h-5 w-5 object-contain"
@@ -57,7 +58,7 @@ export function Experience() {
                 <p className="text-sm font-medium text-zinc-500 dark:text-zinc-400">
                   {item.organization}
                 </p>
-                <p className="mt-2 max-w-xl text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                <p className="mt-2 max-w-xl text-sm leading-relaxed text-pretty text-zinc-600 dark:text-zinc-400">
                   {item.description}
                 </p>
               </li>

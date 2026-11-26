@@ -42,7 +42,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${paperlogy.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        {/* disableTransitionOnChange: colors switch in one frame instead of each
+            element fading at its own transition speed */}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />

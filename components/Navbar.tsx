@@ -25,7 +25,7 @@ export function Navbar() {
         {/* eslint-disable-next-line @next/next/no-html-link-for-pages -- see NAV_LINKS comment above */}
         <a
           href="/#home"
-          className="text-base font-bold tracking-tight text-zinc-900 sm:text-sm sm:font-semibold dark:text-zinc-50"
+          className="inline-flex h-10 items-center text-base font-bold tracking-tight text-zinc-900 sm:text-sm sm:font-semibold dark:text-zinc-50"
         >
           {portfolioData.hero.name}
         </a>
@@ -35,14 +35,14 @@ export function Navbar() {
             <a
               key={link.href}
               href={link.href}
-              className="text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+              className="inline-flex h-10 items-center text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
             >
               {link.label}
             </a>
           ))}
           <Link
             href="/pdf"
-            className="text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
+            className="inline-flex h-10 items-center text-sm text-zinc-600 transition-colors hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100"
           >
             PDF
           </Link>
@@ -56,7 +56,7 @@ export function Navbar() {
             onClick={() => setIsOpen((prev) => !prev)}
             aria-label={isOpen ? "메뉴 닫기" : "메뉴 열기"}
             aria-expanded={isOpen}
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 text-white transition-colors active:bg-zinc-700 dark:bg-zinc-50 dark:text-zinc-900"
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-900 text-white transition-[background-color,scale] duration-200 active:scale-[0.96] active:bg-zinc-700 dark:bg-zinc-50 dark:text-zinc-900"
           >
             {isOpen ? <X size={18} /> : <Menu size={18} />}
           </button>

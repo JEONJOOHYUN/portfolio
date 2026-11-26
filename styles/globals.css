@@ -4,6 +4,20 @@
    the `dark:` variant off that class instead of `prefers-color-scheme`. */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* Pointers that can hover. Tailwind's own `hover:` already waits for this; use
+   it for things that hide until hovered, so touch screens keep them visible. */
+@custom-variant can-hover (@media (hover: hover));
+
+/* Card depth: a hairline + soft layered shadow instead of a grey ring, so the
+   edge reads as elevation (and composes with focus rings). Dark swaps the
+   hairline to white since black shadows vanish on a black page. */
+@theme {
+  --shadow-card: 0 0 0 1px rgb(0 0 0 / 0.06), 0 1px 2px rgb(0 0 0 / 0.06), 0 4px 12px rgb(0 0 0 / 0.04);
+  --shadow-card-hover: 0 0 0 1px rgb(0 0 0 / 0.06), 0 2px 4px rgb(0 0 0 / 0.06), 0 12px 28px rgb(0 0 0 / 0.1);
+  --shadow-card-dark: 0 0 0 1px rgb(255 255 255 / 0.08), 0 1px 2px rgb(0 0 0 / 0.5);
+  --shadow-card-dark-hover: 0 0 0 1px rgb(255 255 255 / 0.12), 0 12px 28px rgb(0 0 0 / 0.6);
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -69,6 +83,9 @@
    shift sideways as it opens/closes. */
 html {
   scrollbar-gutter: stable;
+  /* the sticky navbar (64px phone, 72px desktop) would otherwise cover the
+     top of a section reached through /#about etc. */
+  scroll-padding-top: calc(4.5rem + 1px);
 }
 
 * {
@@ -141,6 +158,11 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+  /* no shrink-on-press either: the 0.96 press scale is motion too */
+  a:active,
+  button:active {
+    scale: none !important;
   }
   .reveal-ready [data-reveal]:not([data-revealed]) {
     opacity: 1;

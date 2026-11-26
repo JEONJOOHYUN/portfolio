@@ -1,11 +1,11 @@
 # Handoff — portfolio
 
-마지막 갱신: 2026-10-16
+마지막 갱신: 2026-11-26
 
 ## Current Goal
 
 배포가 끝난 개인 포트폴리오(취업 지원용). **지금 당장 해야 할 일은 없다.**
-아래 `TODO` 는 사용자 확인이 필요한 콘텐츠 항목이다.
+콘텐츠 TODO 는 2026-11-26 에 모두 정리했다(아래 "TODO" 참고).
 
 ## 구조
 
@@ -23,8 +23,7 @@
 - **다크모드**: next-themes `attribute="class"` + Tailwind v4 `@custom-variant dark (&:where(.dark, .dark *))`.
 - **한글 줄바꿈**: body 에 `word-break: keep-all` ("전주현입니/다." 같은 음절 단위 끊김 방지).
 - **반응형 (2026-10-02, gfactory.ai 참고)**: 제목 `clamp()` 유동 크기, 모바일 원형 햄버거 + 48px 메뉴 항목,
-  주요 버튼 h-12, 프로젝트 카드는 모바일=이미지 위·글 아래 / sm↑=오버레이, 첫 카드(메이플)는 2칸 대표 카드
-  (`wide`, 5장이 2열을 꽉 채우도록), 상세 모달은 모바일 바텀시트.
+  주요 버튼 h-12, 상세 모달은 모바일 바텀시트. 카드 배치는 아래 "프로젝트 4장 (2026-11-26)".
 - **애니메이션은 순수 CSS (2026-10-02, maple-mvp.com 참고)** — Framer Motion 제거로 JS(gzip) 240KB → 200KB.
   - `styles/globals.css` 의 `@theme`: `animate-rise`(등장) / `animate-sheen`(빛 훑기, hover) / `animate-ping-soft`(상태 점).
   - 스크롤 등장: 요소에 `data-reveal` (지연은 `style={{ "--d": "80ms" }}`), `app/page.tsx` 맨 끝의
@@ -68,22 +67,32 @@
   (라이트박스 다이얼로그를 만들지 않아 shadcn 불필요). 파일 `public/workspace/orca-workspace.webp`(1920×1080) — 원본 PNG 에서
   상태줄의 세션/주간 사용률·비용 두 줄, Orca 하단 바 사용률, Windows 사용자 이름이 든 파일 경로 두 줄, 왼쪽 세션 제목 두 줄과 위쪽 탭 제목(작업 내용 노출)을 sharp 로 블러(`extract → blur(9) → composite`, 프로젝트 `node_modules/sharp`).
   이미지를 바꿀 때도 같은 영역을 가린다. `/pdf` 에는 이미지를 넣지 않았다.
-- **Wishes 항목 (2026-10-16)**: 개인 비공개 프로젝트(축의금 방명록 태블릿 앱) — 실사용 완료(사용자 확인). 저장소·사이트가 비공개라
-  `githubUrl`/`liveUrl` 없음. 이미지 `public/projects/Wishes_img.png` 는 **가짜 데이터 화면**(실데이터 금지 — 다시 찍으려면
-  저장소 밖 작업 폴더의 방법을 따른다, 위치는 `C:\dev\handoff.md`). 아이콘은 Wishes 로고 SVG 를 PNG 로.
-  카드 배치: 6개라 `Projects.tsx` 에서 앞의 두 카드(메이플·Wishes)를 2칸 대표 카드(`wide={i < 2}`)로.
-  Wishes 는 행사 뒤에도 가족이 계속 쓰는 중(운영 사이트·실데이터 유지 — 사용자 결정 2026-10-16).
-- **카드 상태 배지 (2026-10-16)**: `project.status = { label, live }` — 메이플 "운영 중", Wishes "사용 중 · 비공개"(둘 다 live = 초록 점 깜빡임),
-  팀 프로젝트 4개 "시연 영상"(회색 점). 배지는 **스크린샷 위가 아니라 제목 위**(스크린샷 왼쪽 위에 두니 Wishes 앱 로고를 가렸다).
+- (2026-11-26) Wishes 카드 관련 결정과 지난 TODO 원문은 [history.md](history.md) 로 옮김.
+- **카드 상태 배지 (2026-10-16)**: `project.status = { label, live }` — 메이플 "운영 중"(live = 초록 점 깜빡임), 냠냠 "졸업작품 · 체험 가능",
+  팀 프로젝트 2개 "시연 영상"(회색 점). 배지는 **스크린샷 위가 아니라 제목 위**(스크린샷 왼쪽 위에 두니 Wishes 앱 로고를 가렸다).
   모달 버튼·`/pdf` 링크 문구는 `project.liveLabel`("사이트 보기"/"시연 영상", 없으면 "데모 보기").
   팀 프로젝트는 백엔드가 팀원 담당·API 비용이 있어 재배포하지 않고 시연 영상 + GitHub 로 둔다(사용자 동의).
 
-## TODO (사용자 확인 필요 — `data/portfolio.ts` 의 `// TODO` 주석)
+- **프로젝트 4장 (2026-11-26, 사용자 결정)**: 순서 메이플 대시보드 → 냠냠캔버스 → MonoGlyph → Typonic. 배치 = 시안 C
+  "대표 1 + 3열"(`ProjectCard` 의 `lead`): 첫 카드는 md↑ 2:1 오버레이 카드, 나머지 3장은 md↑ 한 줄 3열 타일(사진 위·글 아래,
+  "자세히 보기"를 `mt-auto` 로 바닥에 맞춰 세 장의 끝줄 일치). md 미만은 전부 타일 한 줄씩. 시안 캔버스 https://claude.ai/artifact/48XU1wJgXymLgA7Fm9oBbW.
+  StudySwipe·Zombuilder·Wishes 카드는 **데이터에서 지움**(숨김 표시는 Projects 가 클라이언트 컴포넌트라 안 보이는 글도 번들에 실려서),
+  StudySwipe·Zombuilder 는 경력 타임라인에 남기고 `TimelineItem.icon` 으로 로고만 준다. Wishes 는 2026-11-26 운영 종료 → 타임라인 한 줄만
+  (링크·화면·실데이터 없음). CampusBrain 은 넣지 않는다(사용자 결정, 배포 일시 정지).
+- **냠냠캔버스 링크**: `/demo`("체험해 보기")만. `/play` 는 실물 저울 없이 진행 안 되고 `/parent` 는 DB 은퇴(2026-11-15)로 로그인 불가.
+  제출 영상(유튜브)은 아직 → 올리면 링크 자리 추가(지금 `Project` 는 liveUrl 하나라 필드를 더해야 함). 카드 사진은 headless(소리 끔)로
+  `/demo` 를 찍고 앱 버튼·%를 지운 그림(모달 닫기 버튼과 겹쳐서).
+- **디테일 규칙 (2026-11-26, jakub 스킬 5개 = `.claude/skills/`, 메이플에서 복사, MIT, git 에는 안 올림)**: 점검 목록 아티팩트
+  https://claude.ai/artifact/3voepQ82LTSWW2kGFfj2Eb 의 1~12 반영. 누르는 곳 40px↑(테마 h-10, 푸터·메뉴·이름 링크), 테마 전환은
+  `disableTransitionOnChange`, 누름은 전부 `active:scale-[0.96]`(움직임 줄이기면 없음, globals.css), 카드 깊이는 `shadow-card*`(@theme)
+  + 투명 테두리, 작업 화면은 outline 검정/흰색 10%, 본문 `text-pretty`·제목 `text-balance`, 둥근 따옴표·기간 en dash(–), 기술 배지 hover 없음,
+  `scroll-padding-top`(헤더 73px), 모달 `overscroll-contain`, hover 로만 보이는 것은 `can-hover:` 변형(터치에선 항상 보임).
+  13번(모달 포커스 가두기·복귀)은 동작 변경이라 안 함.
 
-- `hero.name` "전주현": 노션에 이름이 없어 GitHub ID 로 추정. 사용자가 이후 정정하지 않음 → 확인되면 TODO 주석 제거.
-- `hero.tagline`, `about.summary`: Claude 가 쓴 초안. 본인 문장으로 다듬기를 권했다.
-- `hero.location` "South Korea": 임시값.
-- `about.gpa` "4.21 / 4.5": 사용자가 직접 입력함. TODO 주석만 남아 있어 지워도 된다.
+## TODO
+
+- 2026-11-26 정리 끝: 이름 "전주현" 확인(GitHub 프로필 이름·git 사용자), tagline 새 문장(사용자 선택), location "South Korea" 유지, gpa 주석 제거.
+- 냠냠 제출 영상 유튜브 링크(위). Next 16.4.3 보안 안내(중간 7건, 16.4.6 에서 수정) → 업그레이드는 사용자 결정 대기.
 
 ## Known Issues / 함정
 
@@ -93,6 +102,10 @@
 - 오래 디버깅한 미리보기 탭은 HMR 상태가 꼬여 없는 변수 에러가 날 수 있다 → 새 탭으로 확인.
 - Vercel 해시가 붙은 배포 주소(`portfolio-xxxx-joohyun.vercel.app`)는 로그인이 필요하다. 공개 주소는 위의 eight-omega 주소.
 - 개발 콘솔의 `next/image` IdPhoto 경고("width or height modified")는 동작과 무관.
+- **Tailwind v4 의 `translate-*`·`scale-*` 는 `transform` 이 아니라 `translate`·`scale` 속성**이다. `transition-[transform,…]` 으로 적으면
+  카드 떠오름·모달 등장이 애니메이션 없이 툭 바뀐다(2026-11-26 발견·수정) → `transition-[translate,scale,…]` 로 적는다.
+- **같은 이름으로 이미지를 바꾸면 개발 서버가 옛 사진을 준다**: `.next/dev/cache/images` 를 지우고 서버를 다시 켠다(Next 16 은 `.next/cache` 가 아님).
+- `next dev`·`next build` 가 보안 안내로 **한 번씩 번갈아 멈춘다**(exit 1) → 같은 명령을 다시 돌리면 진행. `AGENTS.md` 는 next dev 가 다시 씀(그대로 커밋).
 
 ## 검증
 
@@ -125,4 +138,6 @@
 - 2026-10-26 MonoGlyph 항목을 실제 담당 기준으로 고침(사용자 확인): 모델 리서치(MX-Font·DeepVecFont 비교, 입력 글자 수 검토, 최종 파이프라인은 MX-Font),
   ChatGPT식 초기 화면과 생성 폰트 관리자 페이지의 "틀"만 만들어 팀원에게 넘김. 화면 구현·비동기 상태·로딩 UI 문구는 사실과 달라 삭제.
   GitHub 링크(`JEONJOOHYUN/MonoGlyph`)는 팀원이 올린 AI 파이프라인(Python) 저장소 — 프론트 코드 아님, 링크는 그대로 둠. 문구만 바뀌어 Codex 리뷰 생략.
+- 2026-11-26 최신화: 카드 4장(메이플 문구 최신화·사진 교체, 냠냠 새 카드, StudySwipe·Zombuilder·Wishes 카드 삭제 → 타임라인), C 배치,
+  디테일 1~12, Hero 한 줄 새 문장. lint·build, 1440/375 라이트·다크·/pdf·모달 headless 확인, 링크 11개 확인. 화면·문구만이라 Codex 리뷰 생략.
 - 2026-11-01 Next 16.3.1 → 16.4.3 + `npm audit fix`(Next.js 10월 보안 업데이트(2026-10-14: Server Actions DoS·이미지 SVG RCE·use cache RCE, 16.4.1 에서 수정) — `next/image` 를 써서 이미지 항목이 걸림). lint·build·`next start` 로 `/`·`/pdf`·`/_next/image` 확인, Codex 리뷰 지적 없음.

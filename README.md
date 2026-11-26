@@ -1,6 +1,6 @@
 # 안녕하세요, 전주현입니다 👋
 
-> AI 도구를 적극적으로 활용해 UI/UX 디테일과 상태 관리 최적화에 집중하는 프론트엔드 개발자입니다.
+> 직접 쓰는 서비스를 만들고 운영하며, AI 도구와 함께 UI 디테일과 상태 관리를 다듬는 프론트엔드 개발자입니다.
 
 이 저장소는 제 개인 포트폴리오 사이트의 소스 코드입니다.
 
@@ -39,12 +39,10 @@ React·React Native 팀 프로젝트에서 프론트엔드 구조 설계와 구�
 
 | 프로젝트 | 한 줄 소개 | 기술 스택 | 링크 |
 | --- | --- | --- | --- |
-| **메이플 대시보드** | 제가 직접 사용하는 메이플 유틸리티 사이트 | Next.js · Supabase · shadcn/ui | [GitHub](https://github.com/JEONJOOHYUN/maple-dashboard) · [Demo](https://maple-dashboard-eta.vercel.app/) |
-| **Wishes** | 가족 결혼식에서 실제로 쓴 축의금 방명록 태블릿 앱 (태블릿 3대, 손님 약 300명) | Next.js · Supabase Realtime · shadcn/ui | 비공개 (개인정보 포함) |
-| **MonoGlyph** | AI로 나만의 스타일 폰트를 만드는 웹 서비스 | React · TypeScript · OpenAI API | [GitHub](https://github.com/JEONJOOHYUN/MonoGlyph) |
-| **StudySwipe** | AI 맞춤 설문으로 스터디를 매칭하는 모바일 앱 | React Native · TypeScript | [GitHub](https://github.com/JEONJOOHYUN/Study-Swipe-FE) |
-| **Typonic** | AI 기반 코드/커스텀 타자 연습 플랫폼 | React · Tailwind CSS · OpenAI API | [GitHub](https://github.com/JEONJOOHYUN/Typonic-Front) |
-| **Zombuilder** | 게임 유틸리티로 시작한 첫 프론트엔드 프로젝트 | React · CSS | [GitHub](https://github.com/JEONJOOHYUN/ZomBuilder-frontend) |
+| **메이플 대시보드** | 계산기부터 썬데이 예측·숙제 현황까지, 매일 쓰며 키운 메이플 도구 사이트 (개인 · 운영 중) | Next.js · Supabase · NEXON Open API · CLOVA OCR | [GitHub](https://github.com/JEONJOOHYUN/maple-dashboard) · [사이트](https://maple-dashboard-eta.vercel.app/) |
+| **냠냠캔버스** | 먹은 만큼 그림이 자라는 아이 식습관 앱과 ESP32 무게 저울 (졸업작품 · 2인 팀장) | Next.js · Supabase Realtime · ESP32 · Arduino | [GitHub](https://github.com/JEONJOOHYUN/nyamnyam-canvas) · [체험해 보기](https://nyamnyam-canvas.vercel.app/demo) |
+| **MonoGlyph** | AI로 나만의 스타일 폰트를 만드는 웹 서비스 (3인 팀) | React · TypeScript · Tailwind CSS | [GitHub](https://github.com/JEONJOOHYUN/MonoGlyph) · [시연 영상](https://www.youtube.com/watch?v=NnAXeprRV0w) |
+| **Typonic** | AI 기반 코드/커스텀 타자 연습 플랫폼 (4인 팀) | Next.js · React · Tailwind CSS | [GitHub](https://github.com/JEONJOOHYUN/Typonic-Front) · [시연 영상](https://www.youtube.com/watch?v=EQWMjf3YXiU) |
 
 각 프로젝트를 만들며 무엇을 했는지, 어떤 걸 배웠는지는 [포트폴리오 사이트](https://portfolio-eight-omega-91.vercel.app)의 프로젝트 카드를 클릭하면 자세히 볼 수 있습니다.
 
@@ -53,7 +51,8 @@ React·React Native 팀 프로젝트에서 프론트엔드 구조 설계와 구�
 - **Next.js 16** (App Router) + **TypeScript**
 - **Tailwind CSS v4** — `dark:` variant를 `next-themes`의 `.dark` 클래스에 맞춰 커스텀 설정
 - **순수 CSS 애니메이션** — 등장(rise)·빛 훑기(sheen)·맥박(ping) 키프레임과 IntersectionObserver 스크롤 등장. 애니메이션 라이브러리 없이 JS 번들을 가볍게 유지
-- **반응형** — `clamp()` 유동 타이포, 모바일 햄버거 메뉴·바텀시트 모달, 화면 폭에 따라 바뀌는 프로젝트 카드
+- **반응형** — `clamp()` 유동 타이포, 모바일 햄버거 메뉴·바텀시트 모달, 대표 카드 1장 + 3열 프로젝트 카드
+- **디테일** — 누르는 곳 40px 이상, 누를 때 0.96 축소, 테마 전환 때 전환 끄기, 움직임 줄이기 존중, 문장 `text-pretty`·제목 `text-balance`
 - **next-themes** — 깜빡임 없는 다크모드/라이트모드 토글
 - **Paperlogy** 폰트를 `next/font/local`로 self-host (Thin~Black 9단계 굵기 전부 등록)
 - **Vercel**에 배포, GitHub `main` 브랜치에 push할 때마다 자동 재배포

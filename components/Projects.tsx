@@ -20,14 +20,14 @@ export function Projects() {
           <SectionHeading eyebrow="Projects" title="진행한 프로젝트" />
         </div>
 
-        <div className="grid gap-6 sm:grid-cols-2">
+        {/* lead project spans the row; the other three share the next row from md up */}
+        <div className="grid gap-6 md:grid-cols-3">
           {projects.map((project, i) => (
             <ProjectCard
               key={project.id}
               project={project}
-              index={i}
-              // first two are real-use projects; two wide cards keep the 2-col grid full with 6 projects
-              wide={i < 2}
+              lead={i === 0}
+              revealDelay={i === 0 ? 0 : (i - 1) * 90}
               onOpen={setSelected}
             />
           ))}

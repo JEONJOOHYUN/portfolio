@@ -59,7 +59,7 @@ export function Hero() {
 
         <p
           style={{ animationDelay: "200ms" }}
-          className="animate-rise text-base leading-relaxed text-zinc-600 sm:text-lg dark:text-zinc-400"
+          className="animate-rise text-base leading-relaxed text-pretty text-zinc-600 sm:text-lg dark:text-zinc-400"
         >
           {hero.tagline}
         </p>
@@ -70,7 +70,7 @@ export function Hero() {
         >
           <a
             href={`mailto:${hero.email}`}
-            className="group relative flex h-12 items-center justify-center overflow-hidden rounded-full bg-zinc-900 px-7 text-[15px] font-semibold text-white transition-[background-color,transform] duration-200 hover:bg-zinc-700 active:scale-[0.98] sm:h-11 sm:px-6 sm:text-sm dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
+            className="group relative flex h-12 items-center justify-center overflow-hidden rounded-full bg-zinc-900 px-7 text-[15px] font-semibold text-white transition-[background-color,scale] duration-200 hover:bg-zinc-700 active:scale-[0.96] sm:h-11 sm:px-6 sm:text-sm dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
           >
             {/* sheen: a band of light sweeps across on hover */}
             <span
@@ -89,7 +89,7 @@ export function Hero() {
                   target={link.icon === "github" ? "_blank" : undefined}
                   rel="noopener noreferrer"
                   aria-label={link.label}
-                  className="flex h-12 w-12 items-center justify-center rounded-full border border-zinc-200 text-zinc-600 transition-[background-color,transform] duration-200 hover:-translate-y-0.5 hover:bg-zinc-100 active:scale-95 sm:h-11 sm:w-11 dark:border-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-900"
+                  className="flex h-12 w-12 items-center justify-center rounded-full border border-zinc-200 text-zinc-600 transition-[background-color,translate,scale] duration-200 hover:-translate-y-0.5 hover:bg-zinc-100 active:scale-[0.96] sm:h-11 sm:w-11 dark:border-zinc-800 dark:text-zinc-300 dark:hover:bg-zinc-900"
                 >
                   <Icon size={18} />
                 </a>
@@ -101,12 +101,12 @@ export function Hero() {
         <a
           href="#about"
           style={{ animationDelay: "480ms" }}
-          className="animate-rise group mt-8 inline-flex items-center gap-2 text-sm text-zinc-400 hover:text-zinc-600 sm:mt-10 dark:text-zinc-600 dark:hover:text-zinc-400"
+          className="animate-rise group mt-6 inline-flex h-10 items-center gap-2 text-sm text-zinc-400 hover:text-zinc-600 sm:mt-8 dark:text-zinc-600 dark:hover:text-zinc-400"
         >
           더 알아보기
           <ArrowDown
             size={14}
-            className="transition-transform duration-200 group-hover:translate-y-0.5"
+            className="transition-[translate] duration-200 group-hover:translate-y-0.5"
           />
         </a>
       </div>

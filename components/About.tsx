@@ -21,7 +21,7 @@ export function About() {
           {about.summary.map((paragraph) => (
             <p
               key={paragraph}
-              className="text-base leading-relaxed text-zinc-600 dark:text-zinc-400"
+              className="text-base leading-relaxed text-pretty text-zinc-600 dark:text-zinc-400"
             >
               {paragraph}
             </p>
@@ -57,7 +57,8 @@ export function About() {
               href={about.workspace.image}
               target="_blank"
               rel="noopener noreferrer"
-              className="group block overflow-hidden rounded-xl border border-zinc-200 bg-zinc-900 dark:border-zinc-800"
+              // outline paints over the image: a neutral black/white edge instead of a grey border
+              className="group block overflow-hidden rounded-xl bg-zinc-900 outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10"
             >
               <Image
                 src={about.workspace.image}
@@ -65,7 +66,7 @@ export function About() {
                 width={1920}
                 height={1080}
                 sizes="(min-width: 1024px) 480px, (min-width: 640px) 45vw, 100vw"
-                className="h-auto w-full transition-transform duration-300 group-hover:scale-[1.03]"
+                className="h-auto w-full transition-[scale] duration-300 group-hover:scale-[1.03]"
               />
             </a>
             <figcaption className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">
