@@ -86,7 +86,7 @@
 
 - **프로젝트 4장 (2026-11-26, 사용자 결정)**: 순서 메이플 대시보드 → 냠냠캔버스 → MonoGlyph → Typonic. 배치 = 시안 C
   "대표 1 + 3열"(`ProjectCard` 의 `lead`): 첫 카드는 md↑ 2:1 오버레이 카드, 나머지 3장은 md↑ 한 줄 3열 타일(사진 위·글 아래,
-  "자세히 보기"를 `mt-auto` 로 바닥에 맞춰 세 장의 끝줄 일치). md 미만은 전부 타일 한 줄씩. 시안 캔버스 https://claude.ai/artifact/48XU1wJgXymLgA7Fm9oBbW.
+  "자세히 보기"를 `mt-auto` 로 바닥에 맞춰 세 장의 끝줄 일치). md 미만은 전부 타일 한 줄씩. 시안 캔버스 https://claude.ai/artifact/48XU1wJgXymLgA7Fm9oBbW (2026-11-26 삭제됨).
   StudySwipe·Zombuilder·Wishes 카드는 **데이터에서 지움**(숨김 표시는 Projects 가 클라이언트 컴포넌트라 안 보이는 글도 번들에 실려서),
   StudySwipe·Zombuilder 는 경력 타임라인에 남기고 `TimelineItem.icon` 으로 로고만 준다. Wishes 는 2026-11-26 운영 종료 → 타임라인 한 줄만
   (링크·화면·실데이터 없음). CampusBrain 은 넣지 않는다(사용자 결정, 배포 일시 정지).
