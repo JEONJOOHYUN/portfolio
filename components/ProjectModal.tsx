@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState, type CSSProperties } from "react";
+import { useEffect, useRef, useState, type CSSProperties } from "react";
 import Image, { getImageProps } from "next/image";
 import { X, CheckCircle2, Trophy, Users, Calendar, ExternalLink } from "lucide-react";
 import type { Project } from "@/data/portfolio";
@@ -54,9 +54,13 @@ export function ProjectModal({
   project: Project;
   onClose: () => void;
 }) {
-  // Plain CSS transitions driven by two flags: `entered` flips on the frame
-  // after mount (so the hidden → shown transition actually runs) and `closing`
-  // plays the exit before the parent unmounts us.
+  // A native <dialog> opened with showModal(): the browser keeps focus inside it,
+  // makes the page behind inert, and puts focus back on the card when it closes.
+  // The look is unchanged: the dialog fills the screen with a transparent
+  // backdrop and draws its own dimmed layer, so the enter/exit transitions below
+  // still run off two flags — `entered` flips on the frame after mount and
+  // `closing` plays the exit before the dialog closes and the parent unmounts us.
+  const dialogRef = useRef<HTMLDialogElement>(null);
   const [entered, setEntered] = useState(false);
   const [closing, setClosing] = useState(false);
   const shown = entered && !closing;
@@ -64,191 +68,188 @@ export function ProjectModal({
   const handleClose = () => setClosing(true);
 
   useEffect(() => {
+    dialogRef.current?.showModal();
     const id = requestAnimationFrame(() => setEntered(true));
     return () => cancelAnimationFrame(id);
   }, []);
 
   useEffect(() => {
     if (!closing) return;
-    const timeout = setTimeout(onClose, EXIT_MS);
+    // close() fires the dialog's `close` event, which unmounts us via onClose
+    const timeout = setTimeout(() => dialogRef.current?.close(), EXIT_MS);
     return () => clearTimeout(timeout);
-  }, [closing, onClose]);
-
-  useEffect(() => {
-    const originalOverflow = document.body.style.overflow;
-    document.body.style.overflow = "hidden";
-
-    const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "Escape") setClosing(true);
-    };
-    window.addEventListener("keydown", handleKeyDown);
-
-    return () => {
-      document.body.style.overflow = originalOverflow;
-      window.removeEventListener("keydown", handleKeyDown);
-    };
-  }, []);
+  }, [closing]);
 
   return (
-    <div
-      onClick={handleClose}
-      className={`fixed inset-0 z-[100] flex items-end justify-center bg-black/65 transition-opacity duration-200 sm:items-center sm:p-6 ${
-        shown ? "opacity-100" : "opacity-0"
-      }`}
+    <dialog
+      ref={dialogRef}
+      aria-label={project.title}
+      // Esc: play the exit instead of closing at once (if the browser insists, `close` still unmounts us)
+      onCancel={(e) => {
+        e.preventDefault();
+        handleClose();
+      }}
+      onClose={onClose}
+      className="fixed inset-0 m-0 h-full max-h-none w-full max-w-none overflow-hidden bg-transparent p-0 backdrop:bg-transparent"
     >
-      {/* Bottom sheet on phones (thumb-reachable, full width); centered dialog from sm up. */}
       <div
-        onClick={(e) => e.stopPropagation()}
-        role="dialog"
-        aria-modal="true"
-        aria-label={project.title}
-        className={`relative flex max-h-[92dvh] w-full max-w-2xl flex-col overflow-hidden rounded-t-2xl bg-white shadow-2xl transition-[opacity,translate,scale] duration-[220ms] ease-out sm:max-h-[88vh] sm:rounded-2xl dark:bg-zinc-900 ${
-          shown
-            ? "translate-y-0 opacity-100 sm:scale-100"
-            : "translate-y-8 opacity-0 sm:translate-y-3 sm:scale-[0.98]"
+        onClick={handleClose}
+        className={`fixed inset-0 flex items-end justify-center bg-black/65 transition-opacity duration-200 sm:items-center sm:p-6 ${
+          shown ? "opacity-100" : "opacity-0"
         }`}
       >
-        <div className="relative h-48 w-full shrink-0 sm:h-72">
-          <Image
-            {...heroProps(project)}
-            alt={`${project.title} 스크린샷`}
-            loading="eager"
-            fetchPriority="high"
-            className="object-cover object-top"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
+        {/* Bottom sheet on phones (thumb-reachable, full width); centered dialog from sm up. */}
+        <div
+          onClick={(e) => e.stopPropagation()}
+          className={`relative flex max-h-[92dvh] w-full max-w-2xl flex-col overflow-hidden rounded-t-2xl bg-white shadow-2xl transition-[opacity,translate,scale] duration-[220ms] ease-out sm:max-h-[88vh] sm:rounded-2xl dark:bg-zinc-900 ${
+            shown
+              ? "translate-y-0 opacity-100 sm:scale-100"
+              : "translate-y-8 opacity-0 sm:translate-y-3 sm:scale-[0.98]"
+          }`}
+        >
+          <div className="relative h-48 w-full shrink-0 sm:h-72">
+            <Image
+              {...heroProps(project)}
+              alt={`${project.title} 스크린샷`}
+              loading="eager"
+              fetchPriority="high"
+              className="object-cover object-top"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 
-          <button
-            type="button"
-            onClick={handleClose}
-            aria-label="닫기"
-            className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full bg-black/45 text-white backdrop-blur-sm transition-[background-color,scale] duration-200 hover:bg-black/60 active:scale-[0.96] sm:right-4 sm:top-4"
-          >
-            <X size={18} />
-          </button>
-
-          <div className="absolute inset-x-0 bottom-0 flex items-center gap-3 p-5">
-            <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-lg bg-white/90 ring-1 ring-black/5">
-              <Image
-                {...iconProps(project)}
-                alt=""
-                loading="eager"
-                className="h-full w-full object-contain p-1"
-              />
-            </div>
-            <h2 className="text-xl font-bold text-balance text-white sm:text-2xl">{project.title}</h2>
-          </div>
-        </div>
-
-        <div className="overflow-y-auto overscroll-contain p-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))] sm:p-6">
-          <div className="flex flex-col gap-6">
-            <div
-              {...rise(0)}
-              className={`${rise(0).className} flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-zinc-500 dark:text-zinc-400`}
+            <button
+              type="button"
+              onClick={handleClose}
+              autoFocus
+              aria-label="닫기"
+              className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full bg-black/45 text-white backdrop-blur-sm transition-[background-color,scale] duration-200 hover:bg-black/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-white active:scale-[0.96] sm:right-4 sm:top-4"
             >
-              <span className="inline-flex items-center gap-1.5">
-                <Calendar size={15} />
-                {project.period}
-              </span>
-              <span className="inline-flex items-center gap-1.5">
-                <Users size={15} />
-                {project.team}
-              </span>
-            </div>
+              <X size={18} />
+            </button>
 
-            <p
-              {...rise(1)}
-              className={`${rise(1).className} text-base leading-relaxed text-pretty text-zinc-700 dark:text-zinc-300`}
-            >
-              {project.overview}
-            </p>
-
-            <div {...rise(2)}>
-              <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-                나의 역할
-              </h3>
-              <p className="text-sm leading-relaxed text-pretty text-zinc-600 dark:text-zinc-400">
-                {project.role}
-              </p>
-            </div>
-
-            <div {...rise(3)}>
-              <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-                무엇을 했는가
-              </h3>
-              <ul className="flex flex-col gap-2.5">
-                {project.features.map((feature) => (
-                  <li
-                    key={feature}
-                    className="flex gap-2.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400"
-                  >
-                    <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-zinc-400 dark:text-zinc-500" />
-                    <span>{feature}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div {...rise(4)}>
-              <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-                배운 점
-              </h3>
-              <p className="text-sm leading-relaxed text-pretty text-zinc-600 dark:text-zinc-400">
-                {project.learnings}
-              </p>
-            </div>
-
-            {project.achievement && (
-              <div
-                {...rise(5)}
-                className={`${rise(5).className} inline-flex w-fit items-center gap-2 rounded-full bg-amber-50 px-3.5 py-1.5 text-sm font-medium text-amber-700 dark:bg-amber-500/10 dark:text-amber-400`}
-              >
-                <Trophy size={15} />
-                {project.achievement}
+            <div className="absolute inset-x-0 bottom-0 flex items-center gap-3 p-5">
+              <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-lg bg-white/90 ring-1 ring-black/5">
+                <Image
+                  {...iconProps(project)}
+                  alt=""
+                  loading="eager"
+                  className="h-full w-full object-contain p-1"
+                />
               </div>
-            )}
-
-            <div {...rise(6)} className={`${rise(6).className} flex flex-wrap gap-2`}>
-              {project.techStack.map((tech) => (
-                <span
-                  key={tech}
-                  className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-xs font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300"
-                >
-                  {tech}
-                </span>
-              ))}
+              <h2 className="text-xl font-bold text-balance text-white sm:text-2xl">{project.title}</h2>
             </div>
+          </div>
 
-            <div
-              {...rise(7)}
-              className={`${rise(7).className} flex flex-wrap items-center gap-3 pt-1`}
-            >
-              {project.githubUrl && (
-                <a
-                  href={project.githubUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex h-11 items-center gap-1.5 rounded-full bg-zinc-900 px-5 text-sm font-medium text-white transition-[background-color,scale] duration-200 hover:bg-zinc-700 active:scale-[0.96] dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
+          <div className="overflow-y-auto overscroll-contain p-5 pb-[calc(1.25rem+env(safe-area-inset-bottom))] sm:p-6">
+            <div className="flex flex-col gap-6">
+              <div
+                {...rise(0)}
+                className={`${rise(0).className} flex flex-wrap items-center gap-x-5 gap-y-2 text-sm text-zinc-500 dark:text-zinc-400`}
+              >
+                <span className="inline-flex items-center gap-1.5">
+                  <Calendar size={15} />
+                  {project.period}
+                </span>
+                <span className="inline-flex items-center gap-1.5">
+                  <Users size={15} />
+                  {project.team}
+                </span>
+              </div>
+
+              <p
+                {...rise(1)}
+                className={`${rise(1).className} text-base leading-relaxed text-pretty text-zinc-700 dark:text-zinc-300`}
+              >
+                {project.overview}
+              </p>
+
+              <div {...rise(2)}>
+                <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+                  나의 역할
+                </h3>
+                <p className="text-sm leading-relaxed text-pretty text-zinc-600 dark:text-zinc-400">
+                  {project.role}
+                </p>
+              </div>
+
+              <div {...rise(3)}>
+                <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+                  무엇을 했는가
+                </h3>
+                <ul className="flex flex-col gap-2.5">
+                  {project.features.map((feature) => (
+                    <li
+                      key={feature}
+                      className="flex gap-2.5 text-sm leading-relaxed text-zinc-600 dark:text-zinc-400"
+                    >
+                      <CheckCircle2 size={16} className="mt-0.5 shrink-0 text-zinc-400 dark:text-zinc-500" />
+                      <span>{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div {...rise(4)}>
+                <h3 className="mb-2 text-sm font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
+                  배운 점
+                </h3>
+                <p className="text-sm leading-relaxed text-pretty text-zinc-600 dark:text-zinc-400">
+                  {project.learnings}
+                </p>
+              </div>
+
+              {project.achievement && (
+                <div
+                  {...rise(5)}
+                  className={`${rise(5).className} inline-flex w-fit items-center gap-2 rounded-full bg-amber-50 px-3.5 py-1.5 text-sm font-medium text-amber-700 dark:bg-amber-500/10 dark:text-amber-400`}
                 >
-                  <GithubIcon size={16} />
-                  GitHub
-                </a>
+                  <Trophy size={15} />
+                  {project.achievement}
+                </div>
               )}
-              {project.liveUrl && (
-                <a
-                  href={project.liveUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex h-11 items-center gap-1.5 rounded-full border border-zinc-200 px-5 text-sm font-medium text-zinc-700 transition-[background-color,scale] duration-200 hover:bg-zinc-100 active:scale-[0.96] dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
-                >
-                  <ExternalLink size={16} />
-                  {project.liveLabel ?? "데모 보기"}
-                </a>
-              )}
+
+              <div {...rise(6)} className={`${rise(6).className} flex flex-wrap gap-2`}>
+                {project.techStack.map((tech) => (
+                  <span
+                    key={tech}
+                    className="rounded-full bg-zinc-100 px-2.5 py-0.5 text-xs font-medium text-zinc-600 dark:bg-zinc-800 dark:text-zinc-300"
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+
+              <div
+                {...rise(7)}
+                className={`${rise(7).className} flex flex-wrap items-center gap-3 pt-1`}
+              >
+                {project.githubUrl && (
+                  <a
+                    href={project.githubUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex h-11 items-center gap-1.5 rounded-full bg-zinc-900 px-5 text-sm font-medium text-white transition-[background-color,scale] duration-200 hover:bg-zinc-700 active:scale-[0.96] dark:bg-zinc-50 dark:text-zinc-900 dark:hover:bg-zinc-200"
+                  >
+                    <GithubIcon size={16} />
+                    GitHub
+                  </a>
+                )}
+                {project.liveUrl && (
+                  <a
+                    href={project.liveUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex h-11 items-center gap-1.5 rounded-full border border-zinc-200 px-5 text-sm font-medium text-zinc-700 transition-[background-color,scale] duration-200 hover:bg-zinc-100 active:scale-[0.96] dark:border-zinc-700 dark:text-zinc-300 dark:hover:bg-zinc-800"
+                  >
+                    <ExternalLink size={16} />
+                    {project.liveLabel ?? "데모 보기"}
+                  </a>
+                )}
+              </div>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </dialog>
   );
 }

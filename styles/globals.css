@@ -161,7 +161,8 @@ body {
     background: rgb(0 0 0 / 0);
   }
 }
-html:has(.lightbox[open]) {
+/* the page behind any modal dialog (workspace lightbox, project modal) does not scroll */
+html:has(dialog:modal) {
   overflow: hidden;
 }
 

@@ -34,7 +34,10 @@
   - `prefers-reduced-motion` 존중, 인쇄 시 reveal 요소 강제 표시.
   - reveal 요소 안의 `absolute` 자식은 **그 reveal 요소 자신을 기준(`relative`)으로** 배치한다. 애니메이션 중 `transform` 이
     붙으면 그 요소가 기준 상자가 돼, 바깥 기준으로 배치한 자식이 잠깐 튄다(경력 타임라인 아이콘 버그, 2026-10-02 수정).
-- **ProjectModal**: `entered`(마운트 다음 프레임에 true) / `closing` 두 상태로 CSS transition 제어, 220ms 뒤 언마운트.
+- **ProjectModal**: 2026-11-26 부터 기본 `<dialog>`(`showModal()`) — 포커스 가두기 · 뒤 페이지 막기 · 닫으면 누른 카드로 포커스 복귀는 브라우저가.
+  dialog 는 화면 전체 · 투명 backdrop 이고 어두운 층과 시트는 안에서 그대로 그림. Esc 는 `cancel` 을 막고 닫히는 움직임 뒤 `close()` →
+  `close` 이벤트에서 언마운트. 스크롤 잠금은 `html:has(dialog:modal)`(globals.css, Workspace 모달과 같이). Tab 이 마지막 링크 뒤 브라우저
+  주소창으로 가는 건 기본 동작(뒤 페이지로는 안 감). `entered`(마운트 다음 프레임에 true) / `closing` 두 상태로 CSS transition 제어, 220ms 뒤 닫음.
   과거 Framer `AnimatePresence` 의 exit 가 끝나지 않아 모달이 안 닫히던 버그가 있었다.
 - **모달 이미지 로딩 (2026-10-02)**: `next/image` 에 `fill` 만 주고 `sizes` 를 빼면 `100vw` 로 계산돼 40px 아이콘도
   1080px↑ 를 받는다 → 아이콘은 `width/height=40`, 히어로는 `HERO_SIZES`. 둘 다 `loading="eager"`(모달은 열린 뒤에야
@@ -87,14 +90,14 @@
   StudySwipe·Zombuilder 는 경력 타임라인에 남기고 `TimelineItem.icon` 으로 로고만 준다. Wishes 는 2026-11-26 운영 종료 → 타임라인 한 줄만
   (링크·화면·실데이터 없음). CampusBrain 은 넣지 않는다(사용자 결정, 배포 일시 정지).
 - **냠냠캔버스 링크**: `/demo`("체험해 보기")만. `/play` 는 실물 저울 없이 진행 안 되고 `/parent` 는 DB 은퇴(2026-11-15)로 로그인 불가.
-  제출 영상(유튜브)은 아직 → 올리면 링크 자리 추가(지금 `Project` 는 liveUrl 하나라 필드를 더해야 함). 카드 사진은 headless(소리 끔)로
+  제출 영상은 **학과가 유튜브에 올림**(2026-11-26 사용자, 우리가 안 올림) → 링크를 받으면 자리 추가(지금 `Project` 는 liveUrl 하나라 필드를 더해야 함). 카드 사진은 headless(소리 끔)로
   `/demo` 를 찍고 앱 버튼·%를 지운 그림(모달 닫기 버튼과 겹쳐서).
 - **디테일 규칙 (2026-11-26, jakub 스킬 5개 = `.claude/skills/`, 메이플에서 복사, MIT, git 에는 안 올림)**: 점검 목록 아티팩트
   https://claude.ai/artifact/3voepQ82LTSWW2kGFfj2Eb 의 1~12 반영. 누르는 곳 40px↑(테마 h-10, 푸터·메뉴·이름 링크), 테마 전환은
   메이플식 전환(아래), 누름은 전부 `active:scale-[0.96]`(움직임 줄이기면 없음, globals.css), 카드 깊이는 `shadow-card*`(@theme)
   + 투명 테두리, 작업 화면은 outline 검정/흰색 10%, 본문 `text-pretty`·제목 `text-balance`, 둥근 따옴표·기간 en dash(–), 기술 배지 hover 없음,
   `scroll-padding-top`(헤더 73px), 모달 `overscroll-contain`, hover 로만 보이는 것은 `can-hover:` 변형(터치에선 항상 보임).
-  13번(모달 포커스 가두기·복귀)은 동작 변경이라 안 함.
+  13번(모달 포커스)도 같은 날 반영: ProjectModal 을 기본 `<dialog>` + `showModal()` 로(아래 ProjectModal).
 
 ## TODO
 
