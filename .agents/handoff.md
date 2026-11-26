@@ -63,10 +63,17 @@
   홈·`/pdf` 둘 다 map 으로 문단을 그린다. AI 묶음은 `AI / 개발 환경`: Claude Code·Codex·Orca·OpenAI API.
   **Cursor(에디터)는 사용자 요청으로 사이트·README 에서 전부 제거** (지난 프로젝트 문장은 "AI 에이전트"/"AI 코딩 도구"로 바꿈,
   MonoGlyph 의 Claude Agent 배지는 유지).
-- **Workspace 스크린샷 (2026-10-16)**: About 기술 그리드 4번째 칸에 `about.workspace`(이미지·alt·캡션). 클릭하면 원본을 새 탭으로 연다
-  (라이트박스 다이얼로그를 만들지 않아 shadcn 불필요). 파일 `public/workspace/orca-workspace.webp`(1920×1080) — 원본 PNG 에서
-  상태줄의 세션/주간 사용률·비용 두 줄, Orca 하단 바 사용률, Windows 사용자 이름이 든 파일 경로 두 줄, 왼쪽 세션 제목 두 줄과 위쪽 탭 제목(작업 내용 노출)을 sharp 로 블러(`extract → blur(9) → composite`, 프로젝트 `node_modules/sharp`).
-  이미지를 바꿀 때도 같은 영역을 가린다. `/pdf` 에는 이미지를 넣지 않았다.
+- **Workspace 스크린샷 (2026-11-26 교체)**: `about.workspace`(이미지·크기·alt·캡션), 파일 `public/workspace/orca-workspace.webp`(1574×859,
+  사용자가 준 Orca 화면). **글 내용은 최대한 가린다**(사용자): 대화 전체 · 상태줄(모델 · 사용량 · 비용) · 탭 제목 · 왼쪽 프로젝트/세션 목록 ·
+  오른쪽 파일 트리 · 아래 사용량 줄을 sharp `extract → blur(10) → composite` 로 흐림(Orca 메뉴 · 창 틀만 보임). 바꿀 때도 같은 영역.
+  누르면 **모달로 크게**(`components/WorkspaceFigure.tsx`, 사용자 요청 — 새 탭 대신): 브라우저 기본 `<dialog>` + `showModal()` 이라 포커스 가두기 ·
+  Esc · 뒤 페이지 막기 · 닫은 뒤 썸네일로 포커스 복귀를 브라우저가 함(shadcn 안 들임). 바깥 클릭으로 닫힘, 열려 있는 동안 `html` 스크롤 잠금,
+  열고 닫을 때 0.96 → 1 + 배경 어둡게(`.lightbox`, globals.css, `@starting-style` · `allow-discrete`). 큰 사진은 열 때만 그림.
+  닫기 버튼은 사진 **바깥 위**(사진 속 Orca 창 닫기 ×와 헷갈려서) — 사진 높이는 `100dvh - 7rem` 까지라 낮은 가로 화면에서도 버튼이 보임(Codex 지적).
+- **테마 전환 = 메이플 대시보드와 같은 방식 (2026-11-26, 사용자)**: `components/theme-transition.ts`(메이플에서 옮김) — 바꾸는 순간 모든 색이 한 프레임에
+  (`theme-switching`), view transition 이 되는 브라우저는 토글 자리에서 원이 퍼지며(라이트) / 모여들며(다크) 바뀜 + 토글에서 부드러운 빛(메이플은 주황,
+  여기는 흰빛). 해·달 아이콘은 겹쳐 두고 크기 · 흐림으로 교차. 움직임 줄이기면 즉시. next-themes `disableTransitionOnChange` 는 뺐다(토글 움직임까지 끊겨서).
+- 메이플 아이콘 = 메이플 저장소 `app/icon.png`(새 버섯 로고)를 128px 로 → `MapleDashboard_icon.png`(옛 jpg 지움). 메이플 로고가 바뀌면 같이.
 - (2026-11-26) Wishes 카드 관련 결정과 지난 TODO 원문은 [history.md](history.md) 로 옮김.
 - **카드 상태 배지 (2026-10-16)**: `project.status = { label, live }` — 메이플 "운영 중"(live = 초록 점 깜빡임), 냠냠 "졸업작품 · 체험 가능",
   팀 프로젝트 2개 "시연 영상"(회색 점). 배지는 **스크린샷 위가 아니라 제목 위**(스크린샷 왼쪽 위에 두니 Wishes 앱 로고를 가렸다).
@@ -84,7 +91,7 @@
   `/demo` 를 찍고 앱 버튼·%를 지운 그림(모달 닫기 버튼과 겹쳐서).
 - **디테일 규칙 (2026-11-26, jakub 스킬 5개 = `.claude/skills/`, 메이플에서 복사, MIT, git 에는 안 올림)**: 점검 목록 아티팩트
   https://claude.ai/artifact/3voepQ82LTSWW2kGFfj2Eb 의 1~12 반영. 누르는 곳 40px↑(테마 h-10, 푸터·메뉴·이름 링크), 테마 전환은
-  `disableTransitionOnChange`, 누름은 전부 `active:scale-[0.96]`(움직임 줄이기면 없음, globals.css), 카드 깊이는 `shadow-card*`(@theme)
+  메이플식 전환(아래), 누름은 전부 `active:scale-[0.96]`(움직임 줄이기면 없음, globals.css), 카드 깊이는 `shadow-card*`(@theme)
   + 투명 테두리, 작업 화면은 outline 검정/흰색 10%, 본문 `text-pretty`·제목 `text-balance`, 둥근 따옴표·기간 en dash(–), 기술 배지 hover 없음,
   `scroll-padding-top`(헤더 73px), 모달 `overscroll-contain`, hover 로만 보이는 것은 `can-hover:` 변형(터치에선 항상 보임).
   13번(모달 포커스 가두기·복귀)은 동작 변경이라 안 함.
@@ -92,7 +99,7 @@
 ## TODO
 
 - 2026-11-26 정리 끝: 이름 "전주현" 확인(GitHub 프로필 이름·git 사용자), tagline 새 문장(사용자 선택), location "South Korea" 유지, gpa 주석 제거.
-- 냠냠 제출 영상 유튜브 링크(위). Next 16.4.3 보안 안내(중간 7건, 16.4.6 에서 수정) → 업그레이드는 사용자 결정 대기.
+- 냠냠 제출 영상 유튜브 링크(위). Next 는 2026-11-26 16.4.6 으로 올림(보안 안내 7건 해소, `npm audit` 0건).
 
 ## Known Issues / 함정
 
@@ -140,4 +147,5 @@
   GitHub 링크(`JEONJOOHYUN/MonoGlyph`)는 팀원이 올린 AI 파이프라인(Python) 저장소 — 프론트 코드 아님, 링크는 그대로 둠. 문구만 바뀌어 Codex 리뷰 생략.
 - 2026-11-26 최신화: 카드 4장(메이플 문구 최신화·사진 교체, 냠냠 새 카드, StudySwipe·Zombuilder·Wishes 카드 삭제 → 타임라인), C 배치,
   디테일 1~12, Hero 한 줄 새 문장. lint·build, 1440/375 라이트·다크·/pdf·모달 headless 확인, 링크 11개 확인. 화면·문구만이라 Codex 리뷰 생략.
+- 2026-11-26(2): Workspace 사진 교체(내용 가림) + 모달, 메이플식 테마 전환, 메이플 새 아이콘, Next 16.4.6. Codex 리뷰 지적 1건(닫기 버튼 잘림) 반영.
 - 2026-11-01 Next 16.3.1 → 16.4.3 + `npm audit fix`(Next.js 10월 보안 업데이트(2026-10-14: Server Actions DoS·이미지 SVG RCE·use cache RCE, 16.4.1 에서 수정) — `next/image` 를 써서 이미지 항목이 걸림). lint·build·`next start` 로 `/`·`/pdf`·`/_next/image` 확인, Codex 리뷰 지적 없음.

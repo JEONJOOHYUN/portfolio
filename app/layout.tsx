@@ -42,9 +42,10 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${paperlogy.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        {/* disableTransitionOnChange: colors switch in one frame instead of each
-            element fading at its own transition speed */}
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem disableTransitionOnChange>
+        {/* the toggle (components/theme-transition.ts) switches every colour in one
+            frame itself; next-themes' own disableTransitionOnChange would also cut
+            the toggle's sun ↔ moon motion */}
+        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           <Navbar />
           <main className="flex-1">{children}</main>
           <Footer />

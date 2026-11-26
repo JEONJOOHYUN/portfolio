@@ -1,9 +1,9 @@
 import type { CSSProperties } from "react";
-import Image from "next/image";
 import { GraduationCap } from "lucide-react";
 import { portfolioData } from "@/data/portfolio";
 import { SectionHeading } from "@/components/SectionHeading";
 import { SkillBadge } from "@/components/SkillBadge";
+import { WorkspaceFigure } from "@/components/WorkspaceFigure";
 
 const delay = (ms: number) => ({ "--d": `${ms}ms` }) as CSSProperties;
 
@@ -49,30 +49,11 @@ export function About() {
             </div>
           ))}
 
-          <figure data-reveal style={delay(about.skills.length * 80)}>
-            <h3 className="mb-3 text-sm font-semibold uppercase tracking-wide text-zinc-500 dark:text-zinc-400">
-              Workspace
-            </h3>
-            <a
-              href={about.workspace.image}
-              target="_blank"
-              rel="noopener noreferrer"
-              // outline paints over the image: a neutral black/white edge instead of a grey border
-              className="group block overflow-hidden rounded-xl bg-zinc-900 outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10"
-            >
-              <Image
-                src={about.workspace.image}
-                alt={about.workspace.alt}
-                width={1920}
-                height={1080}
-                sizes="(min-width: 1024px) 480px, (min-width: 640px) 45vw, 100vw"
-                className="h-auto w-full transition-[scale] duration-300 group-hover:scale-[1.03]"
-              />
-            </a>
-            <figcaption className="mt-2 text-xs text-zinc-500 dark:text-zinc-400">
-              {about.workspace.caption}
-            </figcaption>
-          </figure>
+          <WorkspaceFigure
+            shot={about.workspace}
+            heading="Workspace"
+            style={delay(about.skills.length * 80)}
+          />
         </div>
       </div>
     </section>

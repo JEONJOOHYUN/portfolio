@@ -118,6 +118,101 @@ body {
   transform: translateY(18px);
 }
 
+/* Workspace lightbox (<WorkspaceFigure/>, a native <dialog>). Fades and grows
+   in from 0.96; closing plays the same in reverse because display/overlay are
+   transitioned discretely. The page behind does not scroll while it is open. */
+.lightbox {
+  margin: auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  max-width: none;
+  max-height: none;
+  overflow: visible;
+  overscroll-behavior: contain;
+  opacity: 0;
+  scale: 0.96;
+  transition:
+    opacity 0.2s ease-out,
+    scale 0.2s ease-out,
+    display 0.2s allow-discrete,
+    overlay 0.2s allow-discrete;
+}
+.lightbox[open] {
+  opacity: 1;
+  scale: 1;
+}
+.lightbox::backdrop {
+  background: rgb(0 0 0 / 0);
+  transition:
+    background-color 0.2s ease-out,
+    display 0.2s allow-discrete,
+    overlay 0.2s allow-discrete;
+}
+.lightbox[open]::backdrop {
+  background: rgb(0 0 0 / 0.75);
+}
+@starting-style {
+  .lightbox[open] {
+    opacity: 0;
+    scale: 0.96;
+  }
+  .lightbox[open]::backdrop {
+    background: rgb(0 0 0 / 0);
+  }
+}
+html:has(.lightbox[open]) {
+  overflow: hidden;
+}
+
+/* Light ↔ dark (components/theme-transition.ts, same as the maple dashboard):
+   every colour changes in the same frame instead of each element fading at its
+   own pace; the toggle alone keeps its motion (press, sun ↔ moon). */
+.theme-switching :not([data-theme-toggle], [data-theme-toggle] *),
+.theme-switching ::before,
+.theme-switching ::after {
+  transition: none !important;
+}
+.theme-switching [data-theme-toggle] {
+  transition-property: scale !important;
+}
+/* Where the browser has view transitions the switch is one motion: the light
+   page is a circle that spreads out of the toggle going light and is gathered
+   back into it going dark, under a soft light from the toggle. */
+@property --theme-r {
+  syntax: "<length>";
+  inherits: true;
+  initial-value: 0px;
+}
+html.theme-vt::view-transition-old(root),
+html.theme-vt::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+html.theme-vt-up::view-transition-new(root),
+html.theme-vt-down::view-transition-old(root) {
+  clip-path: circle(var(--theme-r) at var(--theme-x) var(--theme-y));
+}
+html.theme-vt-down::view-transition-old(root) {
+  z-index: 1;
+}
+::view-transition {
+  pointer-events: none;
+}
+.theme-glow {
+  position: fixed;
+  inset: 0;
+  z-index: 2147483647;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(
+    circle at var(--theme-x) var(--theme-y),
+    rgb(255 255 255 / 0.55),
+    rgb(244 244 245 / 0.22) 32%,
+    transparent 68%
+  );
+}
+
 /* Cursor trail (<CursorTrail/>). JS writes each dot's transform; the dots fade
    along the tail via --i. White + `difference` reads as black on the light
    theme, white on the dark one, and inverts over screenshots. */

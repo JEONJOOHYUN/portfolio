@@ -25,6 +25,9 @@ export interface SkillCategory {
 
 export interface WorkspaceShot {
   image: string;
+  /** intrinsic size of the image file */
+  width: number;
+  height: number;
   alt: string;
   caption: string;
 }
@@ -34,7 +37,7 @@ export interface AboutData {
   summary: string[];
   gpa: string;
   skills: SkillCategory[];
-  /** About 섹션에 작게 보여주는 실제 작업 화면 (사용률·비용은 블러 처리) */
+  /** About 섹션의 실제 작업 화면 (대화 내용·파일 목록·사용량·비용·프로젝트 이름은 블러 처리) */
   workspace: WorkspaceShot;
 }
 
@@ -141,7 +144,9 @@ export const portfolioData: PortfolioData = {
     ],
     workspace: {
       image: "/workspace/orca-workspace.webp",
-      alt: "Orca 한 화면에 여러 프로젝트와 Claude Code 세션, 작업 요약 패널, 파일 트리를 띄워 둔 실제 작업 화면",
+      width: 1574,
+      height: 859,
+      alt: "Orca 왼쪽에 프로젝트 목록, 가운데 Claude Code 세션, 오른쪽에 파일 트리를 띄워 둔 실제 작업 화면(내용은 흐리게 가림)",
       caption: "Orca에서 Claude Code로 작업하는 실제 화면 · 클릭하면 크게 볼 수 있어요",
     },
   },
@@ -178,7 +183,7 @@ export const portfolioData: PortfolioData = {
         "Vercel Cron",
       ],
       image: "/projects/MapleDashboard_img.png",
-      icon: "/projects/MapleDashboard_icon.jpg",
+      icon: "/projects/MapleDashboard_icon.png",
       githubUrl: "https://github.com/JEONJOOHYUN/maple-dashboard",
       liveUrl: "https://maple-dashboard-eta.vercel.app/",
       liveLabel: "사이트 보기",
