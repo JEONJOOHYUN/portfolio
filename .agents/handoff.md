@@ -94,7 +94,7 @@
   제출 영상은 **학과가 유튜브에 올림**(2026-11-26 사용자, 우리가 안 올림) → 링크를 받으면 자리 추가(지금 `Project` 는 liveUrl 하나라 필드를 더해야 함). 카드 사진은 headless(소리 끔)로
   `/demo` 를 찍고 앱 버튼·%를 지운 그림(모달 닫기 버튼과 겹쳐서).
 - **디테일 규칙 (2026-11-26, jakub 스킬 5개 = `.claude/skills/`, 메이플에서 복사, MIT, git 에는 안 올림)**: 점검 목록 아티팩트
-  https://claude.ai/artifact/3voepQ82LTSWW2kGFfj2Eb 의 1~12 반영. 누르는 곳 40px↑(테마 h-10, 푸터·메뉴·이름 링크), 테마 전환은
+  https://claude.ai/artifact/3voepQ82LTSWW2kGFfj2Eb (2026-11-26 삭제됨) 의 1~12 반영. 누르는 곳 40px↑(테마 h-10, 푸터·메뉴·이름 링크), 테마 전환은
   메이플식 전환(아래), 누름은 전부 `active:scale-[0.96]`(움직임 줄이기면 없음, globals.css), 카드 깊이는 `shadow-card*`(@theme)
   + 투명 테두리, 작업 화면은 outline 검정/흰색 10%, 본문 `text-pretty`·제목 `text-balance`, 둥근 따옴표·기간 en dash(–), 기술 배지 hover 없음,
   `scroll-padding-top`(헤더 73px), 모달 `overscroll-contain`, hover 로만 보이는 것은 `can-hover:` 변형(터치에선 항상 보임).
