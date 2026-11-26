@@ -37,7 +37,7 @@ export interface AboutData {
   summary: string[];
   gpa: string;
   skills: SkillCategory[];
-  /** About 섹션의 실제 작업 화면 (대화 내용·파일 목록·사용량·비용·프로젝트 이름은 블러 처리) */
+  /** About 섹션의 실제 작업 화면 (파일 경로·사용량·비용·권한 모드·프로젝트/세션 목록만 블러 처리) */
   workspace: WorkspaceShot;
 }
 
@@ -146,7 +146,7 @@ export const portfolioData: PortfolioData = {
       image: "/workspace/orca-workspace.webp",
       width: 1574,
       height: 859,
-      alt: "Orca 왼쪽에 프로젝트 목록, 가운데 Claude Code 세션, 오른쪽에 파일 트리를 띄워 둔 실제 작업 화면(내용은 흐리게 가림)",
+      alt: "Orca 가운데에서 Claude Code 가 메이플 대시보드의 인수인계 문서를 정리하고 다음 할 일을 보고하는 화면, 오른쪽은 그 프로젝트의 파일 트리",
       caption: "Orca에서 Claude Code로 작업하는 실제 화면 · 클릭하면 크게 볼 수 있어요",
     },
   },
